@@ -28,8 +28,12 @@
 </head>
 <body>
 {%- if build.preview %}
-<div style="background:#fff7d6;border-bottom:1px solid #f0dc8a;color:#6b5400;font-size:13px;text-align:center;padding:7px 16px">Prototyp (Phase 1) – nicht live. Formulare und Rechner folgen in Phase 3.</div>
+<div style="background:#fff7d6;border-bottom:1px solid #f0dc8a;color:#6b5400;font-size:13px;text-align:center;padding:7px 16px">Vorschau (Phase 2) – nicht live. Formulare, Rechner und Suche folgen in Phase 3. <a href="/pruefbericht/" style="color:inherit">Prüfbericht</a></div>
 {%- endif %}
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="defringe" color-interpolation-filters="sRGB"><feMorphology in="SourceAlpha" operator="erode" radius="2" result="e"/><feGaussianBlur in="e" stdDeviation="0.6" result="b"/><feComposite in="SourceGraphic" in2="b" operator="in"/></filter>
+  <filter id="defringe-sm" color-interpolation-filters="sRGB"><feMorphology in="SourceAlpha" operator="erode" radius="0.8" result="e"/><feGaussianBlur in="e" stdDeviation="0.4" result="b"/><feComposite in="SourceGraphic" in2="b" operator="in"/></filter>
+</svg>
 {% include "partials/header.njk" %}
 <main>
 {{ content | safe }}

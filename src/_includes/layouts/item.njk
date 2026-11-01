@@ -15,6 +15,9 @@ layout: layouts/base.njk
     {{ item.content | clean | safe }}
     {%- if item.type == 'post' %}
     <p class="post-foot">Veröffentlicht am {{ item.date | dateDE }}{% if item.modified | isoDate != item.date | isoDate %}, aktualisiert am {{ item.modified | dateDE }}{% endif %}.</p>
+    {%- if item.categories.length or item.tags.length %}
+    <p class="post-terms">{% if item.categories.length %}Kategorie: {% for c in item.categories %}<a href="{{ c.path }}">{{ c.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}{% if item.tags.length %}{% if item.categories.length %} · {% endif %}Schlagwörter: {% for t in item.tags %}<a href="{{ t.path }}">{{ t.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</p>
+    {%- endif %}
     {%- endif %}
   </article>
   {% include "partials/sidebar.njk" %}
