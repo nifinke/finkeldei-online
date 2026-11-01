@@ -18,3 +18,14 @@ export const REDIRECTS = {
   "/rechtliches/bussgeldbescheid/": "/verkehrsrecht/bussgeldbescheid/",
   "/beauftragen/verkehrsordnungswidrigkeit/": "/verkehrsrecht/rechtsanwalt-verkehrsrecht/#Beauftragen",
 };
+
+// Gelöschte KI-Beiträge: liefern „410 Gone“ (übernommen aus den Yoast-Weiterleitungen)
+export const GONE = [
+  "/kuendigungsschutzklage-fristen-chancen-ablauf/",
+  "/handyverstoss-am-steuer-bussfeld-folgen-2026/",
+  "/kuendigungsschutzklage-rechte-fristen-2026/",
+  "/trennungsjahr-scheidung-voraussetzungen-ablauf-2/",
+  "/handyverstoss-auto-bussegeld-punkte-2026/",
+  "/trennungsjahr-ablauf-regeln-rechtliche-tipps/",
+  "/handyverstoss-am-steuer-bussgeld-punkte-einspruch/",
+];
