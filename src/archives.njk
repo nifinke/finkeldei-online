@@ -1,0 +1,37 @@
+---
+pagination:
+  data: wp.archives
+  size: 1
+  alias: arc
+permalink: "{{ arc.path }}"
+layout: layouts/base.njk
+---
+<section class="page-hero">
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Startseite</a> › {% if arc.kind == 'blog' %}Meldungen{% else %}<a href="/meldungen/">Meldungen</a> › {{ arc.title }}{% endif %}</p>
+    <h1>{% if arc.kind == 'category' %}Kategorie: {% elif arc.kind == 'tag' %}Schlagwort: {% endif %}{{ arc.title }}</h1>
+    {%- if arc.total > 1 %}<p class="meta">Seite {{ arc.num }} von {{ arc.total }}</p>{% endif %}
+  </div>
+</section>
+<div class="wrap page-grid">
+  <div>
+    <ul class="post-list">
+      {%- for p in arc.posts %}
+      <li>
+        <a class="post-card" href="{{ p.path }}">
+          <span class="post-date">{{ p.date | dateDE }}{% if p.categories.length %} · {{ p.categories[0].name }}{% endif %}</span>
+          <b>{{ p.title }}</b>
+          {%- if p.excerpt %}<span class="post-excerpt">{{ p.excerpt | truncate(220) }}</span>{% endif %}
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+    {%- if arc.total > 1 %}
+    <nav class="pager" aria-label="Seiten">
+      {% if arc.prev %}<a href="{{ arc.prev }}">← Neuere Beiträge</a>{% else %}<span></span>{% endif %}
+      {% if arc.next %}<a href="{{ arc.next }}">Ältere Beiträge →</a>{% endif %}
+    </nav>
+    {%- endif %}
+  </div>
+  {% set item = { path: '/meldungen/' } %}{% include "partials/sidebar.njk" %}
+</div>

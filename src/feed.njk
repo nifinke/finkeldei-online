@@ -1,0 +1,23 @@
+---
+permalink: /feed/index.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>{{ site.name }}, Rechtsanwalt {{ site.city }}</title>
+  <atom:link href="{{ site.url }}/feed/" rel="self" type="application/rss+xml"/>
+  <link>{{ site.url }}/</link>
+  <description>Rechtsanwalt Dipl.-Jur. Nils Finkeldei</description>
+  <language>de-DE</language>
+  {%- for p in wp.posts | head(10) %}
+  <item>
+    <title>{{ p.title }}</title>
+    <link>{{ site.url }}{{ p.path }}</link>
+    <guid isPermaLink="false">{{ site.url }}/?p={{ p.id }}</guid>
+    <pubDate>{{ p.date | rfc822 }}</pubDate>
+    <description>{{ p.excerpt }}</description>
+  </item>
+  {%- endfor %}
+</channel>
+</rss>

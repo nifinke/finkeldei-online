@@ -1,0 +1,22 @@
+---
+pagination:
+  data: sitemaps
+  size: 1
+  alias: sm
+permalink: "/{{ sm.file }}"
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+{%- if sm.file == 'sitemap_index.xml' %}
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {%- for f in ['post-sitemap.xml','page-sitemap.xml'] %}
+  <sitemap><loc>{{ site.url }}/{{ f }}</loc></sitemap>
+  {%- endfor %}
+</sitemapindex>
+{%- else %}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {%- for u in sm.urls %}
+  <url><loc>{{ site.url }}{{ u.path | urlencodePath }}</loc>{% if u.modified %}<lastmod>{{ u.modified | isoDateTime }}</lastmod>{% endif %}</url>
+  {%- endfor %}
+</urlset>
+{%- endif %}
