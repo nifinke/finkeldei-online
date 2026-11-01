@@ -1,0 +1,21 @@
+---
+layout: layouts/base.njk
+---
+<section class="page-hero">
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Startseite</a>{% for c in crumbs %} › {% if c.url %}<a href="{{ c.url }}">{{ c.label }}</a>{% else %}{{ c.label }}{% endif %}{% endfor %}</p>
+    <h1>{{ item.title | safe }}</h1>
+    {%- if item.type == 'post' %}
+    <p class="meta">{{ item.date | dateDE }}{% if item.categories.length %} · {% for c in item.categories %}{{ c.name }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</p>
+    {%- endif %}
+  </div>
+</section>
+<div class="wrap page-grid">
+  <article class="prose">
+    {{ item.content | clean | safe }}
+    {%- if item.type == 'post' %}
+    <p class="post-foot">Veröffentlicht am {{ item.date | dateDE }}{% if item.modified | isoDate != item.date | isoDate %}, aktualisiert am {{ item.modified | dateDE }}{% endif %}.</p>
+    {%- endif %}
+  </article>
+  {% include "partials/sidebar.njk" %}
+</div>

@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+---
+{{ content | safe }}
+<script type="application/ld+json">{{ {
+  "@context": "https://schema.org",
+  "@type": "Attorney",
+  "@id": site.url + "/#kanzlei",
+  "name": site.name,
+  "url": site.url + "/",
+  "telephone": site.phoneHref,
+  "email": site.email,
+  "address": { "@type": "PostalAddress", "streetAddress": site.street, "postalCode": site.zip, "addressLocality": site.city, "addressCountry": "DE" },
+  "founder": { "@type": "Person", "name": "Nils Finkeldei", "jobTitle": "Rechtsanwalt" }
+} | json | safe }}</script>

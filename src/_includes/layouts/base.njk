@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ seo.title }}</title>
+{%- if seo.description %}
+<meta name="description" content="{{ seo.description }}">
+{%- endif %}
+{%- if build.noindex %}
+<meta name="robots" content="noindex, nofollow">
+{%- elif seo.robots %}
+<meta name="robots" content="{{ seo.robots.index or 'index' }}, {{ seo.robots.follow or 'follow' }}{% if seo.robots['max-image-preview'] %}, {{ seo.robots['max-image-preview'] }}{% endif %}">
+{%- endif %}
+<link rel="canonical" href="{{ seo.canonical or (site.url + page.url) }}">
+<meta property="og:locale" content="de_DE">
+<meta property="og:type" content="{{ seo.ogType or 'website' }}">
+<meta property="og:title" content="{{ seo.title }}">
+{%- if seo.description %}<meta property="og:description" content="{{ seo.description }}">{% endif %}
+<meta property="og:url" content="{{ seo.canonical or (site.url + page.url) }}">
+<meta property="og:site_name" content="{{ site.name }}">
+{%- if seo.ogImage %}<meta property="og:image" content="{{ seo.ogImage }}">{% endif %}
+<link rel="stylesheet" href="/assets/css/site.css">
+{%- if seo.schema %}
+<script type="application/ld+json">{{ seo.schema | json | safe }}</script>
+{%- endif %}
+{%- block schema %}{% endblock %}
+</head>
+<body>
+{%- if build.preview %}
+<div style="background:#fff7d6;border-bottom:1px solid #f0dc8a;color:#6b5400;font-size:13px;text-align:center;padding:7px 16px">Prototyp (Phase 1) – nicht live. Formulare und Rechner folgen in Phase 3.</div>
+{%- endif %}
+{% include "partials/header.njk" %}
+<main>
+{{ content | safe }}
+</main>
+{% include "partials/footer.njk" %}
+<div class="callbar"><a class="btn btn-navy" href="tel:{{ site.phoneHref }}">📞 Anrufen</a><a class="btn btn-line" href="mailto:{{ site.email }}">✉️ E-Mail</a></div>
+</body>
+</html>
