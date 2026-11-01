@@ -11,7 +11,7 @@
         {%- for item in nav %}
         {%- if item.children %}
         <li class="has-sub"><button type="button" class="sub-toggle" aria-haspopup="true">{{ item.label }} ▾</button>
-          <ul class="sub">
+          <ul class="dropdown">
             {%- for c in item.children %}
             <li><a href="{{ c.url }}"{% if c.children %} class="sub-head"{% endif %}>{{ c.label }}</a>
               {%- if c.children %}<ul>{% for g in c.children %}<li><a href="{{ g.url }}">{{ g.label }}</a></li>{% endfor %}</ul>{% endif %}
