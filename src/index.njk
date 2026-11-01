@@ -2,6 +2,10 @@
 layout: layouts/home.njk
 permalink: /
 ---
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="defringe" color-interpolation-filters="sRGB"><feMorphology in="SourceAlpha" operator="erode" radius="2" result="e"/><feGaussianBlur in="e" stdDeviation="0.6" result="b"/><feComposite in="SourceGraphic" in2="b" operator="in"/></filter>
+  <filter id="defringe-sm" color-interpolation-filters="sRGB"><feMorphology in="SourceAlpha" operator="erode" radius="0.8" result="e"/><feGaussianBlur in="e" stdDeviation="0.4" result="b"/><feComposite in="SourceGraphic" in2="b" operator="in"/></filter>
+</svg>
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
