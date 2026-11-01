@@ -1,0 +1,25 @@
+{
+  "url": "https://finkeldei-online.de",
+  "name": "Anwaltskanzlei Finkeldei",
+  "lawyer": "Rechtsanwalt Nils Finkeldei",
+  "street": "Gladbecker Straße 29",
+  "zip": "46236",
+  "city": "Bottrop",
+  "phone": "0 20 41 / 16 285 16",
+  "phoneHref": "+4920411628516",
+  "freephone": "0800 0005768",
+  "freephoneHref": "+498000005768",
+  "email": "kanzlei@finkeldei-online.de",
+  "gtm": "GTM-KPVFQDD",
+  "reviews": {
+    "rating": "5,0",
+    "count": 112,
+    "asOf": "31.10.2026",
+    "url": "https://www.google.com/searchviewer/10?svid=CAwSGxIZCgNwdnESEkNnc3ZaeTh4ZEdkbWRuRnllURgK#sv=CAESzQEKuQEStgEKd0FERGJXZVlUNmxQUThpQmh4eldLWlJqY1F2WU5WbmQ4TTNYX1kwMFNpcVVyUjVsLTFISi1NS0cyVlVZajM3T2Z5bUwxQkVESVBzM0djbjRLUWFPR1duQ2E1NzVOcXRfTmVTeE1MZ0lZd1BLd0tiT2JjUzlFanlrEhdCbEhtYW9uMU5iLUZ4YzhQZzRqNXVBOBoiQUhOMEU3R2VDM0JlaDhSV1ZHVlRkT1dLYmNqTWV4cGF6URIEODA1MRoBMyoAMAA4AUAAGAAgyNmuYkoCEAE"
+  },
+  "photo": "https://finkeldei-online.de/wp-content/uploads/2024/02/Rechtsanwalt_freigestellt_420.png",
+  "video": {
+    "src": "https://finkeldei-online.de/wp-content/uploads/2024/07/Willkommen-4k.mp4",
+    "poster": "https://finkeldei-online.de/wp-content/uploads/2024/07/Willkommen-4k-Thumbnail.png"
+  }
+}

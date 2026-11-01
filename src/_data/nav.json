@@ -1,0 +1,119 @@
+[
+  {
+    "label": "Startseite",
+    "url": "/"
+  },
+  {
+    "label": "Anwalt",
+    "url": "/rechtsanwalt/"
+  },
+  {
+    "label": "Rechtsgebiete",
+    "children": [
+      {
+        "label": "Arbeitsrecht",
+        "url": "/arbeitsrecht/",
+        "children": [
+          {
+            "label": "Abfindung",
+            "url": "/arbeitsrecht/abfindung/"
+          },
+          {
+            "label": "Zeugnis",
+            "url": "/arbeitsrecht/arbeitszeugnis/"
+          },
+          {
+            "label": "Kündigung",
+            "url": "/arbeitsrecht/kuendigung/"
+          },
+          {
+            "label": "Lohnrückstand",
+            "url": "/arbeitsrecht/lohnrueckstand/"
+          },
+          {
+            "label": "Rechtsanwalt Arbeitsrecht",
+            "url": "/arbeitsrecht/rechtsanwalt-arbeitsrecht/"
+          }
+        ]
+      },
+      {
+        "label": "Familienrecht",
+        "url": "/familienrecht/",
+        "children": [
+          {
+            "label": "Trennung",
+            "url": "/familienrecht/trennung/"
+          },
+          {
+            "label": "Scheidung",
+            "url": "/familienrecht/scheidung/"
+          },
+          {
+            "label": "Scheidungsanwalt",
+            "url": "/familienrecht/scheidung/scheidungsanwalt/"
+          },
+          {
+            "label": "Sorgerecht",
+            "url": "/familienrecht/sorgerecht/"
+          },
+          {
+            "label": "Unterhalt",
+            "url": "/familienrecht/unterhalt/"
+          },
+          {
+            "label": "Zugewinnausgleich",
+            "url": "/familienrecht/zugewinnausgleich/"
+          }
+        ]
+      },
+      {
+        "label": "Verkehrsrecht",
+        "url": "/verkehrsrecht/",
+        "children": [
+          {
+            "label": "Bußgeldbescheid",
+            "url": "/verkehrsrecht/bussgeldbescheid/"
+          },
+          {
+            "label": "Verkehrsunfall",
+            "url": "/verkehrsrecht/verkehrsunfall/"
+          },
+          {
+            "label": "Rechtsanwalt Verkehrsrecht",
+            "url": "/verkehrsrecht/rechtsanwalt-verkehrsrecht/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Aktuelles",
+    "url": "/meldungen/"
+  },
+  {
+    "label": "Service",
+    "children": [
+      {
+        "label": "Formulare",
+        "url": "/formulare/"
+      },
+      {
+        "label": "Elektronische Akte",
+        "url": "/elektronische-akte/"
+      },
+      {
+        "label": "Kosten",
+        "url": "/kosten/"
+      }
+    ]
+  },
+  {
+    "label": "Anfahrt",
+    "url": "/kanzlei/"
+  },
+  {
+    "label": "Kontakt",
+    "url": "/kontakt/",
+    "button": true
+  }
+]
