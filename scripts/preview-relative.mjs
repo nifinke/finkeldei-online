@@ -4,7 +4,7 @@ import { readdir, readFile, writeFile, mkdir, cp, rm } from "node:fs/promises";
 import { join, relative, dirname, posix } from "node:path";
 import { existsSync } from "node:fs";
 
-const SRC = "_site", OUT = "_preview", LIVE = "https://www.finkeldei-online.de";
+const SRC = "_site", OUT = "_preview", LIVE = "https://finkeldei-online.de";
 await rm(OUT, { recursive: true, force: true });
 await cp(SRC, OUT, { recursive: true });
 
@@ -20,11 +20,12 @@ for await (const file of walk(OUT)) {
   const from = posix.dirname(relative(OUT, file).split("\\").join("/"));
   let html = await readFile(file, "utf8");
   html = html.replace(/(href|src)="(\/[^"]*)"/g, (m, attr, url) => {
-    const [path, hash = ""] = url.split("#");
+    const [beforeHash, hash = ""] = url.split("#");
+    const [path, query = ""] = beforeHash.split("?");
     let target = path.endsWith("/") ? path + "index.html" : path;
     if (!existsSync(join(OUT, target))) return `${attr}="${LIVE}${url}"${attr === "href" ? ' target="_top"' : ""}`;
     let rel = posix.relative(from, target.slice(1)) || "index.html";
-    return `${attr}="${rel}${hash ? "#" + hash : ""}"`;
+    return `${attr}="${rel}${query ? "?" + query : ""}${hash ? "#" + hash : ""}"`;
   });
   await writeFile(file, html);
 }
