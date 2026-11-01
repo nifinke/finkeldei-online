@@ -230,3 +230,25 @@ video.welcome{width:100%;aspect-ratio:16/9;border-radius:12px;background:#0f2742
 /* Foto: hellen Freistellungsrand ausblenden */
 .portrait img{filter:url(#defringe)}
 .hero-avatar img.av{filter:url(#defringe-sm)}
+
+/* Meldungen */
+.post-list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.post-card{display:block;text-decoration:none;border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:#fff}
+.post-card:hover{border-color:var(--blue);box-shadow:0 6px 18px rgba(15,39,66,.08)}
+.post-card b{display:block;font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:21px;color:var(--navy);line-height:1.3;margin:4px 0 6px}
+.post-date{font-size:13px;color:var(--muted)}
+.post-excerpt{display:block;font-size:15px;color:var(--muted)}
+.pager{display:flex;justify-content:space-between;margin-top:26px}
+.pager a{color:var(--blue);font-weight:600;text-decoration:none}
+.post-terms{font-size:14px;color:var(--muted);margin-top:8px}
+.post-terms a{color:var(--blue)}
+
+/* Schritte */
+.steps{counter-reset:s;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.steps li{counter-increment:s;border-top:3px solid var(--blue);padding-top:12px;color:var(--muted);font-size:15px}
+.steps li::before{content:counter(s);display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;align-items:center;justify-content:center;font-weight:700;font-size:14px;margin-bottom:8px}
+.steps li b{display:block;color:var(--navy);font-size:17px;margin-bottom:4px}
+@media (max-width:980px){.steps{grid-template-columns:1fr}}
+
+/* Thrive-Überschriften mit mehreren Teilen */
+.prose h2>span+span::before,.prose h3>span+span::before{content:" "}
