@@ -1,0 +1,14 @@
+{
+  "name": "finkeldei-online",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "fetch": "node scripts/fetch-wp.mjs",
+    "build": "eleventy",
+    "preview": "eleventy && node scripts/preview-relative.mjs"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.7",
+    "cheerio": "^1.2.0"
+  }
+}
