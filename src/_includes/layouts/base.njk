@@ -20,7 +20,7 @@
 <meta property="og:url" content="{{ seo.canonical or (site.url + page.url) }}">
 <meta property="og:site_name" content="{{ site.name }}">
 {%- if seo.ogImage %}<meta property="og:image" content="{{ seo.ogImage }}">{% endif %}
-<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/site.css?v={{ build.version }}">
 {%- if seo.schema %}
 <script type="application/ld+json">{{ seo.schema | json | safe }}</script>
 {%- endif %}
