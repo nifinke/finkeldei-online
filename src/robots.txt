@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://finkeldei-online.de/sitemap_index.xml
