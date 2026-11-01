@@ -1,0 +1,30 @@
+<header>
+  <div class="wrap hdr">
+    <div>
+      <a class="logo" href="/">
+        <span class="logo-word"><small>ANWALTSKANZLEI</small><b>FINKELDEI</b></span>
+      </a>
+      <a class="stars-mini" href="{{ site.reviews.url }}" target="_blank" rel="nofollow noopener"><span aria-label="{{ site.reviews.rating }} von 5 Sternen">★★★★★</span> {{ site.reviews.rating }} · {{ site.reviews.count }} Google-Bewertungen</a>
+    </div>
+    <nav id="nav" aria-label="Hauptmenü">
+      <ul>
+        {%- for item in nav %}
+        {%- if item.children %}
+        <li class="has-sub"><button type="button" class="sub-toggle" aria-haspopup="true">{{ item.label }} ▾</button>
+          <ul class="sub">
+            {%- for c in item.children %}
+            <li><a href="{{ c.url }}"{% if c.children %} class="sub-head"{% endif %}>{{ c.label }}</a>
+              {%- if c.children %}<ul>{% for g in c.children %}<li><a href="{{ g.url }}">{{ g.label }}</a></li>{% endfor %}</ul>{% endif %}
+            </li>
+            {%- endfor %}
+          </ul>
+        </li>
+        {%- else %}
+        <li><a href="{{ item.url }}"{% if item.button %} class="btn-outline"{% endif %}{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        {%- endif %}
+        {%- endfor %}
+      </ul>
+    </nav>
+    <button class="burger" aria-label="Menü öffnen" aria-controls="nav" aria-expanded="false" onclick="var n=document.getElementById('nav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">☰</button>
+  </div>
+</header>

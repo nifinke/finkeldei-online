@@ -1,0 +1,28 @@
+{%- set area = item.path.split('/')[1] %}
+<aside class="side">
+  <div class="side-box">
+    {%- if area == 'verkehrsrecht' %}
+    <span class="badge red">Einspruchsfrist: nur 2 Wochen</span>
+    <h2>Bußgeldbescheid erhalten?</h2>
+    <p>Wir beantragen Akteneinsicht und prüfen die Messung. Mit Rechtsschutzversicherung holen wir die Deckungszusage ein.</p>
+    {%- elif area == 'arbeitsrecht' %}
+    <span class="badge red">Klagefrist: nur 3 Wochen</span>
+    <h2>Kündigung erhalten?</h2>
+    <p>Wir prüfen, ob die Kündigung wirksam ist – und was an Abfindung drin ist.</p>
+    {%- elif area == 'familienrecht' %}
+    <span class="badge green">Online möglich</span>
+    <h2>Scheidung einleiten</h2>
+    <p>Bei einer einvernehmlichen Scheidung braucht nur einer von Ihnen einen Anwalt.</p>
+    <a class="btn btn-navy" href="https://scheidung-digital.de">Scheidung online einleiten →</a>
+    {%- else %}
+    <h2>Wir helfen Ihnen weiter</h2>
+    <p>Schildern Sie kurz Ihren Fall – wir sagen Ihnen, wie es weitergeht und was es voraussichtlich kostet.</p>
+    {%- endif %}
+    <a class="btn btn-navy" href="tel:{{ site.phoneHref }}">📞 {{ site.phone }}</a>
+    {%- if area == 'verkehrsrecht' %}
+    <a class="btn btn-line" href="tel:{{ site.freephoneHref }}">Kostenfrei: {{ site.freephone }}</a>
+    {%- endif %}
+    <a class="btn btn-line" href="mailto:{{ site.email }}">✉️ E-Mail schreiben</a>
+    <small>★ {{ site.reviews.rating }} bei {{ site.reviews.count }} Google-Bewertungen</small>
+  </div>
+</aside>
