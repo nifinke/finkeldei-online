@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -24,6 +24,17 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Inhalte aus WordPress abrufen
+        run: npm run fetch
+      - name: Abgerufene Inhalte im Projekt sichern
+        run: |
+          git config user.name "Vorschau-Bau"
+          git config user.email "actions@users.noreply.github.com"
+          git add data
+          if ! git diff --cached --quiet; then
+            git commit -m "Inhalte aus WordPress aktualisiert [skip ci]"
+            git push
+          fi
       - name: Prototyp bauen (für Google gesperrt)
         run: npm run preview
         env:
