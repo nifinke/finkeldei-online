@@ -21,5 +21,26 @@
   "video": {
     "src": "https://finkeldei-online.de/wp-content/uploads/2024/07/Willkommen-4k.mp4",
     "poster": "https://finkeldei-online.de/wp-content/uploads/2024/07/Willkommen-4k-Thumbnail.png"
-  }
+  },
+  "openingHours": [
+    {
+      "days": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday"
+      ],
+      "opens": "08:30",
+      "closes": "17:00",
+      "label": "Mo.–Do. 8.30 bis 17.00 Uhr"
+    },
+    {
+      "days": [
+        "Friday"
+      ],
+      "opens": "08:30",
+      "closes": "13:00",
+      "label": "Fr. 8.30 bis 13.00 Uhr"
+    }
+  ]
 }
