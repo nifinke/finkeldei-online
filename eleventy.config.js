@@ -10,6 +10,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("isoDate", (iso) => new Date(iso).toISOString().slice(0, 10));
   eleventyConfig.addFilter("isoDateTime", (iso) => new Date(iso + (iso.endsWith("Z") ? "" : "Z")).toISOString().replace(".000Z", "+00:00"));
   eleventyConfig.addFilter("rfc822", (iso) => new Date(iso).toUTCString());
+  eleventyConfig.addFilter("schemaHours", (list) => (list || []).map((h) => ({
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: h.days.map((d) => "https://schema.org/" + d),
+    opens: h.opens, closes: h.closes,
+  })));
   eleventyConfig.addFilter("head", (arr, n) => (arr || []).slice(0, n));
   eleventyConfig.addFilter("urlencodePath", (p) => p.split("/").map((s) => encodeURIComponent(s).toLowerCase().replace(/%[0-9a-f]{2}/g, (m) => m)).join("/"));
   return {
