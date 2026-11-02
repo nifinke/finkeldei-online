@@ -1606,11 +1606,6 @@
  },
  {
   "sitemap": "page-sitemap.xml",
-  "loc": "https://finkeldei-online.de/kontakt/",
-  "lastmod": "2024-02-02T12:44:39+00:00"
- },
- {
-  "sitemap": "page-sitemap.xml",
   "loc": "https://finkeldei-online.de/arbeitsrecht/",
   "lastmod": "2024-02-05T13:26:29+00:00"
  },
@@ -1718,6 +1713,11 @@
   "sitemap": "page-sitemap.xml",
   "loc": "https://finkeldei-online.de/familienrecht/scheidung/",
   "lastmod": "2026-11-01T21:49:13+00:00"
+ },
+ {
+  "sitemap": "page-sitemap.xml",
+  "loc": "https://finkeldei-online.de/kontakt/",
+  "lastmod": "2026-11-02T21:30:10+00:00"
  },
  {
   "sitemap": "video-sitemap.xml",
