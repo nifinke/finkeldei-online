@@ -11,5 +11,6 @@ layout: layouts/base.njk
   "telephone": site.phoneHref,
   "email": site.email,
   "address": { "@type": "PostalAddress", "streetAddress": site.street, "postalCode": site.zip, "addressLocality": site.city, "addressCountry": "DE" },
+  "openingHoursSpecification": site.openingHours | schemaHours,
   "founder": { "@type": "Person", "name": "Nils Finkeldei", "jobTitle": "Rechtsanwalt" }
 } | json | safe }}</script>
