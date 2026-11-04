@@ -26,6 +26,10 @@ export default function (eleventyConfig) {
     dayOfWeek: h.days.map((d) => "https://schema.org/" + d),
     opens: h.opens, closes: h.closes,
   })));
+  eleventyConfig.addFilter("isoDuration", (sec) => {
+    const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+    return "PT" + (h ? h + "H" : "") + (m ? m + "M" : "") + (s || (!h && !m) ? s + "S" : "");
+  });
   eleventyConfig.addFilter("head", (arr, n) => (arr || []).slice(0, n));
   eleventyConfig.addFilter("urlencodePath", (p) => p.split("/").map((s) => encodeURIComponent(s).toLowerCase().replace(/%[0-9a-f]{2}/g, (m) => m)).join("/"));
   return {
