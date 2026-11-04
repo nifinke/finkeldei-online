@@ -252,3 +252,62 @@ video.welcome{width:100%;aspect-ratio:16/9;border-radius:12px;background:#0f2742
 
 /* Thrive-Überschriften mit mehreren Teilen */
 .prose h2>span+span::before,.prose h3>span+span::before{content:" "}
+
+/* Logo am Desktop 1,5-fach (Layout C) */
+@media (min-width:981px){
+  .logo small{font-size:12.75px}
+  .logo b{font-size:27px}
+}
+
+/* ===== Layout C: Textseiten (mobil zuerst) ===== */
+.pc-hero{background:var(--navy);color:#fff;overflow:hidden}
+.pc-hero-in{padding:26px 18px 0}
+.pc-kicker{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 10px;line-height:1.5}
+.pc-kicker a{text-decoration:none;color:inherit}
+.pc-kicker a:hover{text-decoration:underline}
+.pc-hero h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:32px;line-height:1.12;margin:0 0 12px;overflow-wrap:break-word;hyphens:auto}
+.pc-lead{font-size:16.5px;opacity:.9;margin:0 0 10px}
+.pc-pic{position:relative;display:flex;justify-content:center;margin:6px -18px 0;background:radial-gradient(ellipse 65% 85% at 50% 100%,#24507f 0,var(--navy) 100%)}
+.pc-pic img{display:block;width:240px;height:300px;object-fit:contain;object-position:bottom}
+.pc-cap{position:absolute;left:0;right:0;bottom:0;padding:26px 18px 12px;background:linear-gradient(transparent,rgba(10,28,48,.92));font-size:14px}
+.pc-cap b{display:block;font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:19px}
+.pc-rev{display:inline-flex;align-items:center;gap:6px;min-height:32px;color:#fff;text-decoration:underline;text-underline-offset:3px;font-size:14px;opacity:.95}
+.stars{color:var(--gold)}
+.pc-plain .pc-hero-in{padding-bottom:26px}
+body:has(.pc-pic) .stars-mini{display:none}
+.pc-body{padding:24px 18px 34px}
+.pc-facts{border-left:4px solid var(--blue);background:var(--bg);padding:14px 16px;border-radius:0 12px 12px 0;margin:0 0 26px;font-size:16px;line-height:1.55}
+.pc-facts b{display:block;color:var(--navy);margin-bottom:6px}
+.pc-facts strong{color:var(--navy)}
+.pc-facts ul{margin:0;padding-left:18px}
+.pc-facts li{margin-bottom:4px}
+.prose.pc-prose{max-width:none;font-family:Georgia,"Times New Roman",serif;font-size:18.5px;line-height:1.72;color:#2a2f36}
+.pc-prose strong,.pc-prose b{color:var(--navy)}
+.pc-prose h2{font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);line-height:1.45;margin:2em 0 .6em}
+.pc-prose h3{font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:19px;color:var(--navy);line-height:1.3}
+.pc-prose h4{font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.pc-prose table,.pc-prose .placeholder,.pc-prose .wp-block-button__link{font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.pc-prose>*:first-child{margin-top:0}
+.pc-end{background:#f7f3ec;padding:28px 18px;text-align:center}
+.pc-end img{display:block;width:88px;height:88px;border-radius:50%;object-fit:cover;object-position:top;margin:0 auto 12px;background:#e8e1d4}
+.pc-end .badge{margin-bottom:10px}
+.pc-end h2{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:23px;color:var(--navy);margin:0 0 8px}
+.pc-end p{color:var(--muted);margin:0 0 16px;font-size:16px}
+.pc-btns{display:grid;gap:8px}
+.pc-btns .btn{justify-content:center;min-height:48px}
+@media (min-width:900px){
+  .pc-hero-in{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:end;min-height:380px;padding:0 20px}
+  .pc-text{padding:50px 0}
+  .pc-hero h1{font-size:48px}
+  .pc-lead{font-size:19px}
+  .pc-pic{margin:0;height:100%;align-items:flex-end}
+  .pc-pic img{width:300px;height:370px}
+  .pc-plain .pc-hero-in{display:block;min-height:0;padding:0 24px;max-width:808px}
+  .pc-body{max-width:808px;margin:0 auto;padding:40px 24px 56px}
+  .prose.pc-prose{font-size:19.5px}
+  .pc-facts{font-size:17px}
+  .pc-end{padding:40px 24px}
+  .pc-end-in{max-width:640px;margin:0 auto}
+  .pc-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+  .pc-btns .btn{width:auto;padding:12px 22px}
+}
