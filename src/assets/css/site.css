@@ -274,7 +274,7 @@ video.welcome{width:100%;aspect-ratio:16/9;border-radius:12px;background:#0f2742
 .pc-rev{display:inline-flex;align-items:center;gap:6px;min-height:32px;color:#fff;text-decoration:underline;text-underline-offset:3px;font-size:14px;opacity:.95}
 .stars{color:var(--gold)}
 .pc-plain .pc-hero-in{padding-bottom:26px}
-body:has(.pc-pic) .stars-mini{display:none}
+body:has(.pc-pic,.pc-author) .stars-mini{display:none}
 .pc-body{padding:24px 18px 34px}
 .pc-facts{border-left:4px solid var(--blue);background:var(--bg);padding:14px 16px;border-radius:0 12px 12px 0;margin:0 0 26px;font-size:16px;line-height:1.55}
 .pc-facts b{display:block;color:var(--navy);margin-bottom:6px}
@@ -310,4 +310,16 @@ body:has(.pc-pic) .stars-mini{display:none}
   .pc-end-in{max-width:640px;margin:0 auto}
   .pc-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
   .pc-btns .btn{width:auto;padding:12px 22px}
+}
+
+/* Layout C: Beitragsseiten */
+.pc-date{font-size:14px;opacity:.8;margin:0}
+.pc-author{display:flex;align-items:center;gap:12px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.15)}
+.pc-author img{flex:none;width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:top;background:#24507f;border:2px solid rgba(255,255,255,.6)}
+.pc-author b{display:block;font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:17px}
+.pc-author .pc-rev{min-height:28px;font-size:13.5px}
+.pc-prose .post-foot,.pc-prose .post-terms{font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+@media (min-width:900px){
+  .pc-post .pc-text{padding:36px 0 30px}
+  .pc-post h1{font-size:40px}
 }
