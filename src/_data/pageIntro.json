@@ -1,1 +1,138 @@
-{}
+{
+ "/verkehrsrecht/": {
+  "lead": "Unfallschaden durchsetzen, Bußgeldbescheide prüfen lassen – mit mehr als 20 Jahren Erfahrung.",
+  "facts": [
+   "Unfall ohne eigene Schuld: Ihre Anwaltskosten trägt die Kfz-Haftpflichtversicherung des Unfallgegners.",
+   "Gegen einen Bußgeldbescheid ist Einspruch nur innerhalb von <strong>2 Wochen</strong> ab Erhalt möglich.",
+   "Wir beantragen Akteneinsicht und prüfen, welche Verteidigung Erfolgsaussicht hat."
+  ]
+ },
+ "/verkehrsrecht/rechtsanwalt-verkehrsrecht/": {
+  "lead": "Anhörungsbogen oder Bußgeldbescheid erhalten? Rufen Sie an – kostenfrei unter 0800 0005768.",
+  "facts": [
+   "Geben Sie keine eigene Stellungnahme ab – Sie haben das Recht zu schweigen.",
+   "Nur ein Anwalt erhält vollständige Akteneinsicht.",
+   "Melden Sie sich früh: Oft lassen sich schon vor dem Bußgeldbescheid Weichen stellen."
+  ]
+ },
+ "/verkehrsrecht/verkehrsunfall/": {
+  "lead": "Was Ihnen nach einem Unfall zusteht – und warum Sie die Regulierung nicht der Versicherung überlassen sollten.",
+  "facts": [
+   "Ohne eigene Schuld zahlt die gegnerische Haftpflichtversicherung auch Ihre Anwaltskosten.",
+   "Für Schadensersatz und Schmerzensgeld kommt es darauf an, wen das überwiegende Verschulden trifft.",
+   "Gutachter, Reparaturauftrag, Angaben an die Versicherungen: vorher mit dem Anwalt abstimmen."
+  ]
+ },
+ "/verkehrsrecht/bussgeldbescheid/": {
+  "lead": "Viele Bußgeldbescheide sind angreifbar – wenn Sie rechtzeitig handeln.",
+  "facts": [
+   "Anhörungsbogen: keine Angaben zur Sache machen und ihn nicht selbst zurücksenden.",
+   "Einspruch nur innerhalb von <strong>2 Wochen</strong> ab Bekanntgabe des Bescheids möglich.",
+   "Wir beantragen Akteneinsicht und prüfen Messung und Verfahren auf Fehler."
+  ]
+ },
+ "/arbeitsrecht/": {
+  "lead": "Kündigung, Abfindung, Arbeitszeugnis, ausstehender Lohn – Beratung und Vertretung im Arbeitsverhältnis.",
+  "facts": [
+   "Gegen eine Kündigung muss innerhalb von <strong>3 Wochen</strong> Klage erhoben werden.",
+   "Unterschreiben Sie keine Vereinbarung Ihres Arbeitgebers, ohne sie prüfen zu lassen.",
+   "Einen Anspruch auf Abfindung gibt es nur in Ausnahmefällen – meist wird sie ausgehandelt."
+  ]
+ },
+ "/arbeitsrecht/rechtsanwalt-arbeitsrecht/": {
+  "lead": "Kündigung erhalten? Rufen Sie an – mit mehr als 20 Jahren Erfahrung.",
+  "facts": [
+   "Klage nur innerhalb von <strong>3 Wochen</strong> ab Zugang der Kündigung.",
+   "Auch Formfehler der Kündigung müssen sofort gerügt werden.",
+   "Nichts unterschreiben: Ein Aufhebungsvertrag kann zur Kürzung des Arbeitslosengeldes führen."
+  ]
+ },
+ "/arbeitsrecht/kuendigung/": {
+  "lead": "Warum die ersten drei Wochen über Ihren Arbeitsplatz und Ihre Abfindung entscheiden.",
+  "facts": [
+   "Kündigungsschutzklage nur innerhalb von <strong>3 Wochen</strong>.",
+   "Häufiges Ergebnis: ein Vergleich mit Abfindung.",
+   "In der ersten Instanz trägt jede Seite ihre Anwaltskosten selbst – Rechtsschutz oder Prozesskostenhilfe prüfen wir mit."
+  ]
+ },
+ "/arbeitsrecht/abfindung/": {
+  "lead": "Ein gesetzlicher Anspruch besteht selten – ausgehandelt wird eine Abfindung umso häufiger.",
+  "facts": [
+   "Auch bei betriebsbedingter Kündigung gibt es nicht automatisch eine Abfindung.",
+   "Am häufigsten: Abfindung im gerichtlichen Vergleich nach einer Kündigungsschutzklage.",
+   "Weitere Wege: Auflösung durch das Gericht nach § 9 KSchG oder ein Sozialplan."
+  ]
+ },
+ "/familienrecht/": {
+  "lead": "Trennung, Scheidung, Unterhalt, Vermögen – Beratung schon bevor Sie sich trennen.",
+  "facts": [
+   "Wir beraten nicht erst nach der Trennung, sondern schon im Vorfeld.",
+   "Geschieden wird in der Regel nach einem Trennungsjahr.",
+   "Mit Verfahrenskostenhilfe ist eine Scheidung oft ohne eigene Kosten möglich."
+  ]
+ },
+ "/familienrecht/scheidung/": {
+  "lead": "Ablauf, Voraussetzungen und Kosten – Schritt für Schritt erklärt.",
+  "facts": [
+   "Voraussetzung ist in der Regel <strong>1 Jahr</strong> Trennung.",
+   "Nur wer den Scheidungsantrag stellt, braucht zwingend einen Anwalt.",
+   "Bei Grundsicherungsgeld (früher Bürgergeld) trägt meist die Landeskasse Anwalts- und Gerichtskosten."
+  ]
+ },
+ "/familienrecht/trennung/": {
+  "lead": "Wer sich trennen will, sollte nichts übereilen – die richtige Vorbereitung spart Geld.",
+  "facts": [
+   "Vor der Trennung: Kontovollmacht widerrufen und wichtige Unterlagen kopieren.",
+   "Getrennt leben geht auch in der gemeinsamen Wohnung – gut dokumentiert.",
+   "Den Hausrat früh mit einer von beiden unterschriebenen Liste aufteilen."
+  ]
+ },
+ "/familienrecht/unterhalt/": {
+  "lead": "Kindesunterhalt, Trennungsunterhalt, nachehelicher Unterhalt – wer wem wie viel schuldet.",
+  "facts": [
+   "Kindesunterhalt richtet sich nach der Düsseldorfer Tabelle – entscheidend ist das richtig ermittelte Nettoeinkommen.",
+   "Trennungsunterhalt kann bis zur Rechtskraft der Scheidung verlangt werden.",
+   "Nach der Scheidung gilt Eigenverantwortung – nachehelicher Unterhalt nur in bestimmten Fällen."
+  ]
+ },
+ "/familienrecht/zugewinnausgleich/": {
+  "lead": "Was am Ende der Ehe mit dem Vermögen geschieht – und was Schenkungen und Erbschaften daran ändern.",
+  "facts": [
+   "Zugewinn = Endvermögen minus Anfangsvermögen; ausgeglichen wird die Hälfte des Unterschieds.",
+   "Stichtag für das Endvermögen ist die Einreichung des Scheidungsantrags.",
+   "Schenkungen und Erbschaften fallen grundsätzlich nicht in den Ausgleich."
+  ]
+ },
+ "/familienrecht/sorgerecht/": {
+  "lead": "Gemeinsames Sorgerecht ist der Regelfall – auch nach Trennung und Scheidung.",
+  "facts": [
+   "Beide Eltern behalten grundsätzlich das gemeinsame Sorgerecht.",
+   "Alltagsfragen entscheidet der Elternteil, bei dem das Kind lebt; Wichtiges wie die Schulwahl beide gemeinsam.",
+   "Bei Streit entscheidet das Familiengericht, etwa über das Aufenthaltsbestimmungsrecht."
+  ]
+ },
+ "/kosten/": {
+  "lead": "Was ein Anwalt kostet, wer die Kosten trägt und wann der Staat hilft.",
+  "facts": [
+   "Oft muss der Gegner Ihre Anwaltskosten erstatten.",
+   "Die voraussichtlichen Kosten besprechen wir zu Beginn des ersten Gesprächs.",
+   "Bei geringem Einkommen: Beratungshilfe außergerichtlich, Prozesskostenhilfe vor Gericht."
+  ]
+ },
+ "/kontakt/": {
+  "lead": "Telefon, E-Mail oder Brief – Termine nach Vereinbarung.",
+  "facts": [
+   "Bürozeiten: Mo.–Do. 8.30–17.00 Uhr, Fr. 8.30–13.00 Uhr.",
+   "Telefon 0 20 41 / 16 285 16, Fax 0 20 41 / 16 281 02.",
+   "Gladbecker Straße 29, 46236 Bottrop."
+  ]
+ },
+ "/rechtsanwalt/": {
+  "lead": "Bankkaufmann und Rechtsanwalt – Ihre wirtschaftlichen Interessen im Mittelpunkt.",
+  "facts": [
+   "Ausbildung zum Bankkaufmann, Studium an der Ruhr-Universität Bochum (Diplom-Jurist).",
+   "Referendariat am Landgericht Essen, zweites Staatsexamen 2005 mit Prädikat.",
+   "Schwerpunkte: Verkehrsrecht, Arbeitsrecht, Familienrecht."
+  ]
+ }
+}
