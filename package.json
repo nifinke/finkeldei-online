@@ -4,12 +4,13 @@
   "type": "module",
   "scripts": {
     "fetch": "node scripts/fetch-wp.mjs",
-    "build": "eleventy",
-    "preview": "eleventy && node scripts/redirects.mjs && node scripts/check.mjs && node scripts/preview-relative.mjs",
+    "build": "eleventy && pagefind --site _site",
+    "preview": "eleventy && node scripts/redirects.mjs && node scripts/check.mjs && pagefind --site _site && node scripts/preview-relative.mjs",
     "check": "node scripts/check.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.7",
-    "cheerio": "^1.2.0"
+    "cheerio": "^1.2.0",
+    "pagefind": "1.5.2"
   }
 }
