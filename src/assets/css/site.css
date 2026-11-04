@@ -323,3 +323,21 @@ body:has(.pc-pic,.pc-author) .stars-mini{display:none}
   .pc-post .pc-text{padding:36px 0 30px}
   .pc-post h1{font-size:40px}
 }
+
+/* Layout C: Archive, Landingpage, Fußzeile */
+.pc-list .post-card{border-radius:12px}
+.pc-list .post-card b{font-size:21px}
+.pc-cta{display:grid;gap:10px;margin:18px 0 22px}
+.pc-cta .btn{justify-content:center;min-height:48px}
+.pc-more{grid-template-columns:1fr;margin:0 0 1em;font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.pc-more a{color:var(--navy)}
+.pc-steps{grid-template-columns:1fr;font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;margin:0 0 1em}
+.pc-steps li{margin:0}
+.pc-prose video.welcome{margin-top:.5em}
+.foot-hours{margin-top:10px}
+@media (min-width:900px){
+  .pc-cta{display:flex;flex-wrap:wrap}
+  .pc-cta .btn{width:auto;padding:12px 22px}
+  .pc-more{grid-template-columns:1fr 1fr}
+}
+.pc-prose .pc-steps{padding-left:0}
