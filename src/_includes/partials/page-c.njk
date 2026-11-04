@@ -23,7 +23,7 @@
   <div class="pc-facts"><b>Das Wichtigste in Kürze</b><ul>{% for f in intro.facts %}<li>{{ f | safe }}</li>{% endfor %}</ul></div>
   {%- endif %}
   <article class="prose pc-prose">
-    {{ item.content | clean | safe }}
+    {{ item.content | dropPhotoBox | clean | safe }}
   </article>
 </div>
 {%- if not plain %}
