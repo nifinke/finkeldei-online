@@ -60,3 +60,15 @@ for (const path of ["/", "/rechtsanwalt/", "/kanzlei/", "/bewerten/", "/trennung
 }
 
 console.log(`Seiten ${pages.length}, Beiträge ${posts.length}, Kategorien ${categories.length}, Schlagwörter ${tags.length}, Medien ${slim.length}, Sitemap-Adressen ${urls.length}`);
+
+// Ausgewählte Bilder lokal ablegen (für Entwürfe, Vorlagen und eingebettete Fassungen)
+const LOCAL_MEDIA = [
+  "/wp-content/uploads/2024/02/Rechtsanwalt_freigestellt_420.png",
+];
+await mkdir("data/media", { recursive: true });
+for (const p of LOCAL_MEDIA) {
+  const res = await fetch(SITE + p, { headers: { "User-Agent": HEADERS["User-Agent"] } });
+  if (!res.ok) { console.warn(`Bild ${p}: HTTP ${res.status}`); continue; }
+  await writeFile(`data/media/${p.split("/").pop()}`, Buffer.from(await res.arrayBuffer()));
+}
+console.log(`${LOCAL_MEDIA.length} Bild(er) lokal abgelegt`);
