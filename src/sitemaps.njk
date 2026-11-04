@@ -9,10 +9,30 @@ eleventyExcludeFromCollections: true
 <?xml version="1.0" encoding="UTF-8"?>
 {%- if sm.file == 'sitemap_index.xml' %}
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {%- for f in ['post-sitemap.xml','page-sitemap.xml'] %}
+  {%- for f in ['post-sitemap.xml','page-sitemap.xml','video-sitemap.xml'] %}
   <sitemap><loc>{{ site.url }}/{{ f }}</loc></sitemap>
   {%- endfor %}
 </sitemapindex>
+{%- elif sm.video %}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  {%- for v in videos.list %}
+  <url>
+    <loc>{{ site.url }}{{ v.path | urlencodePath }}</loc>
+    <video:video>
+      <video:title><![CDATA[{{ v.title | safe }}]]></video:title>
+      <video:publication_date>{{ v.publicationDate }}</video:publication_date>
+      <video:description><![CDATA[{{ v.description | safe }}]]></video:description>
+      <video:content_loc>{{ v.contentLoc }}</video:content_loc>
+      {%- if v.duration %}<video:duration>{{ v.duration }}</video:duration>{% endif %}
+      {%- if v.width %}<video:width>{{ v.width }}</video:width><video:height>{{ v.height }}</video:height>{% endif %}
+      <video:thumbnail_loc>{{ v.thumbnailLoc }}</video:thumbnail_loc>
+      {%- for t in v.tags %}<video:tag><![CDATA[{{ t | safe }}]]></video:tag>{% endfor %}
+      <video:family_friendly>{{ v.familyFriendly }}</video:family_friendly>
+      {%- if v.uploader %}<video:uploader>{{ v.uploader }}</video:uploader>{% endif %}
+    </video:video>
+  </url>
+  {%- endfor %}
+</urlset>
 {%- else %}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {%- for u in sm.urls %}
