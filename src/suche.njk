@@ -1,0 +1,54 @@
+---
+layout: layouts/base.njk
+permalink: /suche/
+eleventyExcludeFromCollections: true
+seo:
+  title: "Suche – Anwaltskanzlei Finkeldei"
+  description: "Seiten und Meldungen der Anwaltskanzlei Finkeldei durchsuchen."
+  canonical: "https://finkeldei-online.de/suche/"
+  robots:
+    index: noindex
+    follow: follow
+---
+{#- Suche: Index von Pagefind, entsteht beim Bau; gesucht wird im Browser -#}
+<section class="pc-hero pc-plain pc-post">
+  <div class="pc-hero-in">
+    <div class="pc-text">
+      <p class="pc-kicker"><a href="/">{{ site.name }}</a></p>
+      <h1>Suche</h1>
+      <form class="sx-form" role="search" action="/suche/" onsubmit="event.preventDefault()">
+        <label for="sx-q" class="sx-label">Suchbegriff</label>
+        <input id="sx-q" name="q" type="search" placeholder="z. B. Kündigung, Bußgeld, Unterhalt" autocomplete="off" enterkeyhint="search">
+      </form>
+    </div>
+  </div>
+</section>
+<div class="pc-body">
+  <p class="sx-status" id="sx-status" aria-live="polite"></p>
+  <ol class="sx-results" id="sx-results"></ol>
+  <noscript><p>Die Suche benötigt JavaScript.</p></noscript>
+</div>
+<script type="module">
+  // Wurzel der Website ermitteln (Vorschau liegt in einem Unterordner)
+  const root = new URL("../", location.href).pathname;
+  const pagefind = await import(root + "pagefind/pagefind.js");
+  await pagefind.options({ baseUrl: root, excerptLength: 26 });
+  pagefind.init();
+  const q = document.getElementById("sx-q"), list = document.getElementById("sx-results"), status = document.getElementById("sx-status");
+  const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+  async function run(term) {
+    const t = term.trim();
+    history.replaceState(null, "", t ? "?q=" + encodeURIComponent(t) : location.pathname);
+    if (t.length < 2) { list.innerHTML = ""; status.textContent = ""; return; }
+    const search = await pagefind.debouncedSearch(t, {}, 200);
+    if (search === null) return; // von einer neueren Eingabe überholt
+    const top = await Promise.all(search.results.slice(0, 20).map((r) => r.data()));
+    status.textContent = search.results.length ? `${search.results.length} Treffer${search.results.length > 20 ? " – die 20 besten:" : ""}` : "Keine Treffer. Versuchen Sie einen anderen Begriff.";
+    list.innerHTML = top.map((d) => `<li><a class="post-card" href="${esc(d.url)}">
+      <span class="post-date">${esc((d.filters.typ || ["Seite"])[0])}${d.meta.datum ? " · " + esc(d.meta.datum) : ""}</span>
+      <b>${esc(d.meta.title || "")}</b><span class="post-excerpt">${d.excerpt}</span></a></li>`).join("");
+  }
+  q.addEventListener("input", () => run(q.value));
+  const start = new URLSearchParams(location.search).get("q");
+  if (start) { q.value = start; run(start); } else q.focus();
+</script>
