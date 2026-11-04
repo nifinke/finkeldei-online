@@ -53,13 +53,36 @@ for (const m of maps) {
 }
 await writeFile("data/sitemap-urls.json", JSON.stringify(urls, null, 1));
 
+// Video-Sitemap von Yoast Video: Quelle für /video-sitemap.xml und die VideoObject-Angaben
+const videoMap = maps.find((m) => m.endsWith("/video-sitemap.xml"));
+const videos = [];
+if (videoMap) {
+  const xml = (await get(videoMap, true)).body;
+  const tag = (block, name) => (block.match(new RegExp(`<video:${name}[^>]*>(?:<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>)?</video:${name}>`)) || [])[1]?.trim() || "";
+  const toSite = (u) => u.replace(SITE, "https://finkeldei-online.de");
+  for (const u of xml.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
+    const b = u[1];
+    const loc = (b.match(/<loc>([^<]+)<\/loc>/) || [])[1];
+    if (!loc || !b.includes("<video:video>")) continue;
+    videos.push({
+      path: new URL(loc).pathname,
+      title: tag(b, "title"), description: tag(b, "description"), publicationDate: tag(b, "publication_date"),
+      contentLoc: toSite(tag(b, "content_loc")), thumbnailLoc: toSite(tag(b, "thumbnail_loc")),
+      duration: Number(tag(b, "duration")) || null, width: Number(tag(b, "width")) || null, height: Number(tag(b, "height")) || null,
+      tags: [...b.matchAll(/<video:tag>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/video:tag>/g)].map((m) => m[1].trim()),
+      familyFriendly: tag(b, "family_friendly") || "yes", uploader: tag(b, "uploader"),
+    });
+  }
+}
+await writeFile("data/videos.json", JSON.stringify(videos, null, 1));
+
 // Seiten mit Thrive-Layout: gerenderte Fassung als Vorlage für den Nachbau
 for (const path of ["/", "/rechtsanwalt/", "/kanzlei/", "/bewerten/", "/trennung-scheidung-unterhalt-zugewinn-sorgerecht-hausrat-versorgungsausgleich/"]) {
   const r = await get(SITE + path, true);
   if (r) await writeFile(`data/live/${path.replace(/^\/|\/$/g, "").replace(/\//g, "_") || "startseite"}.html`, r.body);
 }
 
-console.log(`Seiten ${pages.length}, Beiträge ${posts.length}, Kategorien ${categories.length}, Schlagwörter ${tags.length}, Medien ${slim.length}, Sitemap-Adressen ${urls.length}`);
+console.log(`Seiten ${pages.length}, Beiträge ${posts.length}, Kategorien ${categories.length}, Schlagwörter ${tags.length}, Medien ${slim.length}, Sitemap-Adressen ${urls.length}, Videos ${videos.length}`);
 
 // Ausgewählte Bilder lokal ablegen (für Entwürfe, Vorlagen und eingebettete Fassungen)
 const LOCAL_MEDIA = [

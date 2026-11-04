@@ -61,9 +61,44 @@ for (const f of files) {
 }
 const deadList = Object.entries(dead).map(([path, from]) => ({ path, from: [...from].slice(0, 5), count: from.size }));
 
+// Video-Sitemap: jeder Eintrag aus Yoast Video muss in der neuen Sitemap stehen, das Video auf der Seite eingebunden sein
+const liveVideos = existsSync("data/videos.json") ? JSON.parse(readFileSync("data/videos.json", "utf8")) : [];
+const vsFile = join(OUT, "video-sitemap.xml");
+const built = [];
+if (existsSync(vsFile)) {
+  const $v = cheerio.load(readFileSync(vsFile, "utf8"), { xmlMode: true });
+  $v("url").each((_, u) => built.push({
+    path: new URL($v(u).children("loc").text()).pathname,
+    title: $v(u).find("video\\:title").text().trim(),
+    content: $v(u).find("video\\:content_loc").text().trim(),
+    duration: $v(u).find("video\\:duration").text().trim(),
+    thumb: $v(u).find("video\\:thumbnail_loc").text().trim(),
+  }));
+}
+const videoRows = [];
+for (const v of liveVideos) {
+  const b = built.find((x) => x.path === v.path);
+  const issues = [];
+  if (!b) issues.push("fehlt in der Video-Sitemap");
+  else {
+    if (b.title !== v.title) issues.push("Titel abweichend");
+    if (b.content !== v.contentLoc) issues.push("Videodatei abweichend");
+    if (String(v.duration || "") !== b.duration) issues.push("Länge abweichend");
+    if (b.thumb !== v.thumbnailLoc) issues.push("Vorschaubild abweichend");
+  }
+  videoRows.push({ path: v.path, file: v.contentLoc.split("/").pop(), status: issues.length ? "abweichend" : "ok", issues });
+}
+for (const b of built.filter((b) => !liveVideos.some((v) => v.path === b.path))) videoRows.push({ path: b.path, file: b.content.split("/").pop(), status: "zusätzlich", issues: [] });
+for (const r of videoRows) {
+  const f = fileFor(r.path);
+  const html = existsSync(f) ? readFileSync(f, "utf8") : "";
+  if (!/<video[\s>]/.test(html)) { r.issues.push("kein Video auf der Seite"); r.status = "abweichend"; }
+  if (!html.includes('"VideoObject"')) { r.issues.push("keine VideoObject-Angabe"); r.status = "abweichend"; }
+}
+
 const count = (s) => rows.filter((r) => r.status === s).length;
-const summary = { geprueft: rows.length, ok: count("ok"), abweichend: count("abweichend"), fehlt: count("fehlt"), geplant: count("geplant"), toteLinks: deadList.length };
-writeFileSync("pruefbericht.json", JSON.stringify({ summary, rows, dead: deadList }, null, 1));
+const summary = { geprueft: rows.length, ok: count("ok"), abweichend: count("abweichend"), fehlt: count("fehlt"), geplant: count("geplant"), toteLinks: deadList.length, videos: videoRows.length, videosAbweichend: videoRows.filter((r) => r.status === "abweichend").length };
+writeFileSync("pruefbericht.json", JSON.stringify({ summary, rows, dead: deadList, videos: videoRows }, null, 1));
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
 const tr = (r) => `<tr><td><a href="${esc(r.path)}">${esc(r.path)}</a></td><td>${r.status}</td><td>${esc([r.note, ...r.issues].filter(Boolean).join(" · "))}</td></tr>`;
@@ -74,5 +109,6 @@ writeFileSync(join(OUT, "pruefbericht", "index.html"), `<!doctype html><html lan
 <div class="k"><div><b>${summary.geprueft}</b>Adressen geprüft</div><div><b>${summary.ok}</b>identisch</div><div><b>${summary.abweichend}</b>abweichend</div><div><b>${summary.fehlt}</b>fehlen</div><div><b>${summary.geplant}</b>geplante Änderungen</div><div><b>${summary.toteLinks}</b>tote interne Links</div></div>
 <h2>Abweichungen und geplante Änderungen</h2><table><tr><th>Adresse</th><th>Status</th><th>Hinweis</th></tr>${rows.filter((r) => r.status !== "ok").map(tr).join("")}</table>
 <h2>Tote interne Links</h2><table><tr><th>Ziel</th><th>Anzahl Seiten</th><th>z. B. auf</th></tr>${deadList.map((d) => `<tr><td>${esc(d.path)}</td><td>${d.count}</td><td>${d.from.map(esc).join("<br>")}</td></tr>`).join("") || "<tr><td colspan=3>keine</td></tr>"}</table>
+<h2>Video-Sitemap</h2><table><tr><th>Seite</th><th>Video</th><th>Status</th><th>Hinweis</th></tr>${videoRows.map((v) => `<tr><td><a href="${esc(v.path)}">${esc(v.path)}</a></td><td>${esc(v.file)}</td><td>${v.status}</td><td>${esc(v.issues.join(" · "))}</td></tr>`).join("") || "<tr><td colspan=4>keine Videos</td></tr>"}</table>
 <h2>Alle Adressen</h2><table><tr><th>Adresse</th><th>Status</th><th>Hinweis</th></tr>${rows.map(tr).join("")}</table></body></html>`);
 console.log(summary);
