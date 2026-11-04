@@ -43,7 +43,7 @@ export default function () {
     modified: item.modified,
     image: media[item.featured_media] || null,
     categories: (item.categories || []).map((id) => categories.find((c) => c.id === id)).filter(Boolean)
-      .map((c) => ({ name: decode(c.name), path: pathOf(c.link) })),
+      .map((c) => ({ name: decode(c.name), path: pathOf(c.link), slug: c.slug, parent: c.parent })),
     tags: (item.tags || []).map((id) => tags.find((t) => t.id === id)).filter(Boolean)
       .map((t) => ({ name: decode(t.name), path: pathOf(t.link) })),
     seo: seoOf(item.yoast_head_json, item.title?.rendered, item.type),
