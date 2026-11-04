@@ -341,3 +341,21 @@ body:has(.pc-pic,.pc-author) .stars-mini{display:none}
   .pc-more{grid-template-columns:1fr 1fr}
 }
 .pc-prose .pc-steps{padding-left:0}
+
+/* Suche */
+.hdr nav{margin-left:auto}
+.hdr-actions{display:flex;align-items:center;gap:14px}
+.search-link{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;color:var(--navy);text-decoration:none}
+.search-link:hover{background:var(--bg);color:var(--blue)}
+.sx-form{margin-top:16px}
+.sx-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.sx-form input{width:100%;font:inherit;font-size:17px;padding:14px 16px;border-radius:10px;border:0;color:var(--ink);background:#fff;min-height:52px}
+.sx-status{color:var(--muted);font-size:15px;margin:0 0 14px}
+.sx-results{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.sx-results mark{background:#fff1c2;color:inherit;padding:0 1px;border-radius:2px}
+.sx-results .post-card b{font-size:20px}
+@media (max-width:520px){
+  .hdr{gap:10px}
+  .hdr-actions{gap:6px}
+  .stars-mini{white-space:nowrap;font-size:11.5px}
+}
