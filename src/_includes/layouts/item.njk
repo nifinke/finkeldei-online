@@ -1,6 +1,9 @@
 ---
 layout: layouts/base.njk
 ---
+{%- if item.type == 'page' %}
+{% include "partials/page-c.njk" %}
+{%- else %}
 <section class="page-hero">
   <div class="wrap">
     <p class="crumbs"><a href="/">Startseite</a>{% for c in crumbs %} › {% if c.url %}<a href="{{ c.url }}">{{ c.label }}</a>{% else %}{{ c.label }}{% endif %}{% endfor %}</p>
@@ -22,3 +25,4 @@ layout: layouts/base.njk
   </article>
   {% include "partials/sidebar.njk" %}
 </div>
+{%- endif %}
