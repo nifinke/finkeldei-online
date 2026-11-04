@@ -6,32 +6,33 @@ seo:
   description: "Trennung, Scheidung, Unterhalt, Zugewinn, Sorgerecht und Versorgungsausgleich: Rechtsanwalt Nils Finkeldei begleitet Sie – persönlich in Bottrop, telefonisch oder per Video."
   canonical: "https://finkeldei-online.de/trennung-scheidung-unterhalt-zugewinn-sorgerecht-hausrat-versorgungsausgleich/"
   ogType: website
+endArea: familienrecht
 ---
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <p class="eyebrow" style="display:block">Familienrecht in Bottrop</p>
+{#- Scheidungs-Landingpage im Layout C -#}
+<section class="pc-hero">
+  <div class="pc-hero-in">
+    <div class="pc-text">
+      <p class="pc-kicker"><a href="/familienrecht/">Familienrecht</a> in Bottrop</p>
       <h1>Trennung und Scheidung –<br>wir begleiten Sie durch alle Schritte.</h1>
-      <p class="lead">Rechtsanwalt Nils Finkeldei berät und vertritt Sie zu Scheidung, Unterhalt, Zugewinnausgleich, Sorgerecht, Hausrat und Versorgungsausgleich. Persönlich in Bottrop, telefonisch oder per Video.</p>
-      <div class="cta-row">
+      <p class="pc-lead">Rechtsanwalt Nils Finkeldei berät und vertritt Sie zu Scheidung, Unterhalt, Zugewinnausgleich, Sorgerecht, Hausrat und Versorgungsausgleich. Persönlich in Bottrop, telefonisch oder per Video.</p>
+      <div class="pc-cta">
         <a class="btn btn-primary" href="tel:{{ site.phoneHref }}">📞 {{ site.phone }}</a>
         <a class="btn btn-ghost" href="https://scheidung-digital.de">Scheidung online einleiten →</a>
       </div>
-      <div class="trust">
-        <span>★ {{ site.reviews.rating }} bei {{ site.reviews.count }} Google-Bewertungen</span>
-        <span>Seit 2005 in Bottrop</span>
-        <span>Verfahrenskostenhilfe prüfen wir mit</span>
-      </div>
     </div>
-    <div class="portrait"><img src="{{ site.photo }}" alt="Rechtsanwalt Nils Finkeldei" width="420" height="540"></div>
+    <div class="pc-pic">
+      <img src="/assets/img/nils-finkeldei.webp?v={{ build.version }}" width="420" height="540" alt="{{ site.lawyer }}" fetchpriority="high">
+      <div class="pc-cap"><b>{{ site.lawyer }}</b><a class="pc-rev" href="{{ site.reviews.url }}" target="_blank" rel="nofollow noopener"><span class="stars" aria-label="{{ site.reviews.rating }} von 5 Sternen">★★★★★</span> {{ site.reviews.rating }} · {{ site.reviews.count }} Google-Bewertungen</a></div>
+    </div>
   </div>
 </section>
-
-<section class="block">
-  <div class="wrap">
-    <h2 class="sec-title">Ihre Themen</h2>
-    <p class="sec-sub">Ob Sie gerade erst getrennt sind oder die Scheidung schon einreichen möchten: Hier finden Sie die wichtigsten Informationen.</p>
-    <div class="more">
+{%- set intro = pageIntro['/familienrecht/scheidung/'] %}
+<div class="pc-body">
+  <div class="pc-facts"><b>Das Wichtigste in Kürze</b><ul>{% for f in intro.facts %}<li>{{ f | safe }}</li>{% endfor %}</ul></div>
+  <div class="prose pc-prose">
+    <h2>Ihre Themen</h2>
+    <p>Ob Sie gerade erst getrennt sind oder die Scheidung schon einreichen möchten: Hier finden Sie die wichtigsten Informationen.</p>
+    <div class="more pc-more">
       <a href="/familienrecht/trennung/">Trennung<span>Trennungsjahr, Getrenntleben, Trennungsunterhalt</span></a>
       <a href="/familienrecht/scheidung/">Scheidung<span>Ablauf, Voraussetzungen, Kosten</span></a>
       <a href="/familienrecht/unterhalt/">Unterhalt<span>Kindes- und Ehegattenunterhalt</span></a>
@@ -41,45 +42,19 @@ seo:
       <a href="/familienrecht/scheidung/">Ehewohnung und Hausrat<span>Wer bleibt in der Wohnung, wer bekommt was?</span></a>
       <a href="/familienrecht/scheidung/scheidungsanwalt/">Scheidungsanwalt<span>Was Ihr Anwalt für Sie übernimmt</span></a>
     </div>
-  </div>
-</section>
-
-<section class="block" style="padding-top:0">
-  <div class="wrap">
-    <h2 class="sec-title">So läuft eine einvernehmliche Scheidung ab</h2>
-    <ol class="steps">
+    <h2>So läuft eine einvernehmliche Scheidung ab</h2>
+    <ol class="steps pc-steps">
       <li><b>Trennungsjahr</b>Die Ehe kann in der Regel erst geschieden werden, wenn Sie seit mindestens einem Jahr getrennt leben.</li>
       <li><b>Scheidungsantrag</b>Der Antrag muss von einem Rechtsanwalt gestellt werden. Bei einer einvernehmlichen Scheidung braucht nur einer von Ihnen einen Anwalt.</li>
       <li><b>Versorgungsausgleich</b>Beide füllen einen Fragebogen zu ihren Rentenanrechten aus. Die Auskünfte der Versorgungsträger dauern meist mehrere Wochen bis Monate.</li>
       <li><b>Scheidungstermin</b>Das Familiengericht hört Sie beide persönlich an und spricht in der Regel im selben Termin die Scheidung aus.</li>
       <li><b>Rechtskraft</b>Die Scheidung wird nach einem Monat rechtskräftig – sofort, wenn beide anwaltlich vertreten sind und auf Rechtsmittel verzichten.</li>
     </ol>
-  </div>
-</section>
-
-<section class="block reviews">
-  <div class="wrap about">
-    <div>
-      <h2 class="sec-title">Was kostet die Scheidung?</h2>
-      <p>Anwalts- und Gerichtskosten sind gesetzlich geregelt und deutschlandweit einheitlich. Ihre Höhe hängt vom Einkommen der Eheleute und von der Zahl der auszugleichenden Rentenanrechte ab.</p>
-      <p>Beziehen Sie Grundsicherungsgeld, ist die Scheidung für Sie in der Regel nicht mit Kosten verbunden: Dann übernimmt die Landeskasse über die Verfahrenskostenhilfe die Anwalts- und Gerichtskosten.</p>
-      <a href="/familienrecht/scheidung/#scheidungskosten" style="color:var(--blue);font-weight:600;text-decoration:none">Kosten jetzt schätzen →</a>
-    </div>
+    <h2>Was kostet die Scheidung?</h2>
+    <p>Anwalts- und Gerichtskosten sind gesetzlich geregelt und deutschlandweit einheitlich. Ihre Höhe hängt vom Einkommen der Eheleute und von der Zahl der auszugleichenden Rentenanrechte ab.</p>
+    <p>Beziehen Sie Grundsicherungsgeld, ist die Scheidung für Sie in der Regel nicht mit Kosten verbunden: Dann übernimmt die Landeskasse über die Verfahrenskostenhilfe die Anwalts- und Gerichtskosten.</p>
+    <p><a href="/familienrecht/scheidung/#scheidungskosten">Kosten jetzt schätzen →</a></p>
     <video class="welcome" controls preload="none" playsinline poster="https://finkeldei-online.de/wp-content/uploads/2024/07/Scheidung-4k-Thumbnail.jpg" src="https://finkeldei-online.de/wp-content/uploads/2024/07/Scheidung-1080p.mp4"></video>
   </div>
-</section>
-
-<section class="block contact">
-  <div class="wrap contact-grid">
-    <div>
-      <h2>Sprechen Sie mit uns.</h2>
-      <p>Schildern Sie uns kurz Ihre Situation. Wir sagen Ihnen, wie es weitergeht und womit Sie bei den Kosten rechnen müssen.</p>
-      <p style="font-size:14px;opacity:.75">{{ site.name }} · {{ site.street }} · {{ site.zip }} {{ site.city }}</p>
-    </div>
-    <div class="ways">
-      <a class="way" href="tel:{{ site.phoneHref }}"><span class="i">📞</span><span><b>{{ site.phone }}</b><small>Telefonische Hotline</small></span></a>
-      <a class="way" href="https://scheidung-digital.de"><span class="i">💻</span><span><b>scheidung-digital.de</b><small>Scheidung online einleiten</small></span></a>
-      <a class="way" href="mailto:{{ site.email }}"><span class="i">✉️</span><span><b>{{ site.email }}</b><small>E-Mail</small></span></a>
-    </div>
-  </div>
-</section>
+</div>
+{% include "partials/page-end.njk" %}
