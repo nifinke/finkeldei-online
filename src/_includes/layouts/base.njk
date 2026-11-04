@@ -25,6 +25,21 @@
 <script type="application/ld+json">{{ seo.schema | json | safe }}</script>
 {%- endif %}
 {%- block schema %}{% endblock %}
+{%- set vid = videos.byPath[page.url] %}
+{%- if vid %}
+<script type="application/ld+json">{{ {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": vid.title,
+  "description": vid.description,
+  "thumbnailUrl": vid.thumbnailLoc,
+  "uploadDate": vid.publicationDate,
+  "duration": vid.duration | isoDuration,
+  "contentUrl": vid.contentLoc,
+  "inLanguage": "de",
+  "isFamilyFriendly": vid.familyFriendly == "yes"
+} | json | safe }}</script>
+{%- endif %}
 </head>
 <body>
 {%- if build.preview %}
