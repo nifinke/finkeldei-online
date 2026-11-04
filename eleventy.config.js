@@ -1,9 +1,20 @@
 import { cleanContent } from "./scripts/clean-content.mjs";
+import * as cheerio from "cheerio";
 
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/robots.txt": "robots.txt" });
   eleventyConfig.addFilter("clean", (html) => cleanContent(html || ""));
+  // Layout C: Fotokästen aus dem WordPress-Text ausblenden (Foto steht schon im Seitenkopf)
+  eleventyConfig.addFilter("dropPhotoBox", (html) => {
+    if (!html || !/Rechtsanwalt_freigestellt_420|GesichtLomoKl/.test(html)) return html;
+    const $ = cheerio.load(html, null, false);
+    $('img[src*="Rechtsanwalt_freigestellt_420"], img[src*="GesichtLomoKl"]').each((_, img) => {
+      const box = $(img).closest('div[style*="float"]');
+      (box.length ? box : $(img)).remove();
+    });
+    return $.html();
+  });
   eleventyConfig.addFilter("json", (v) => JSON.stringify(v));
   eleventyConfig.addFilter("dateDE", (iso) =>
     new Date(iso).toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" }));
