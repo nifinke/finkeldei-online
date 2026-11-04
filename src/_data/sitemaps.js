@@ -11,5 +11,6 @@ export default function () {
     { file: "sitemap_index.xml" },
     { file: "post-sitemap.xml", urls: [{ path: "/meldungen/", modified: posts[0]?.modified }, ...posts] },
     { file: "page-sitemap.xml", urls: pages },
+    { file: "video-sitemap.xml", video: true },
   ];
 }
