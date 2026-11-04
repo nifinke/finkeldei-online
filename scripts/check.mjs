@@ -48,6 +48,7 @@ const files = [];
 (function walk(d) { for (const e of readdirSync(d)) { const p = join(d, e); statSync(p).isDirectory() ? walk(p) : p.endsWith(".html") && files.push(p); } })(OUT);
 const dead = {};
 for (const f of files) {
+  if (f.startsWith(join(OUT, "pruefbericht"))) continue; // eigener Bericht aus einem früheren Lauf
   const $ = cheerio.load(readFileSync(f, "utf8"));
   $("a[href]").each((_, a) => {
     const h = $(a).attr("href");
