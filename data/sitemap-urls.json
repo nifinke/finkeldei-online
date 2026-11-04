@@ -1631,11 +1631,6 @@
  },
  {
   "sitemap": "page-sitemap.xml",
-  "loc": "https://finkeldei-online.de/familienrecht/trennung/",
-  "lastmod": "2024-02-05T13:34:52+00:00"
- },
- {
-  "sitemap": "page-sitemap.xml",
   "loc": "https://finkeldei-online.de/familienrecht/sorgerecht/",
   "lastmod": "2024-02-05T13:36:13+00:00"
  },
@@ -1651,23 +1646,8 @@
  },
  {
   "sitemap": "page-sitemap.xml",
-  "loc": "https://finkeldei-online.de/verkehrsrecht/",
-  "lastmod": "2024-02-05T13:38:39+00:00"
- },
- {
-  "sitemap": "page-sitemap.xml",
-  "loc": "https://finkeldei-online.de/kosten/",
-  "lastmod": "2024-02-05T13:44:58+00:00"
- },
- {
-  "sitemap": "page-sitemap.xml",
   "loc": "https://finkeldei-online.de/verkehrsrecht/verkehrsunfall/",
   "lastmod": "2024-02-05T13:49:54+00:00"
- },
- {
-  "sitemap": "page-sitemap.xml",
-  "loc": "https://finkeldei-online.de/rechtsanwalt/",
-  "lastmod": "2024-07-27T22:34:28+00:00"
  },
  {
   "sitemap": "page-sitemap.xml",
@@ -1720,6 +1700,26 @@
   "lastmod": "2026-11-02T21:30:10+00:00"
  },
  {
+  "sitemap": "page-sitemap.xml",
+  "loc": "https://finkeldei-online.de/kosten/",
+  "lastmod": "2026-11-04T21:03:02+00:00"
+ },
+ {
+  "sitemap": "page-sitemap.xml",
+  "loc": "https://finkeldei-online.de/verkehrsrecht/",
+  "lastmod": "2026-11-04T21:03:04+00:00"
+ },
+ {
+  "sitemap": "page-sitemap.xml",
+  "loc": "https://finkeldei-online.de/familienrecht/trennung/",
+  "lastmod": "2026-11-04T21:03:06+00:00"
+ },
+ {
+  "sitemap": "page-sitemap.xml",
+  "loc": "https://finkeldei-online.de/rechtsanwalt/",
+  "lastmod": "2026-11-04T21:03:44+00:00"
+ },
+ {
   "sitemap": "video-sitemap.xml",
   "loc": "https://finkeldei-online.de/",
   "lastmod": null
@@ -1727,6 +1727,11 @@
  {
   "sitemap": "video-sitemap.xml",
   "loc": "https://finkeldei-online.de/familienrecht/scheidung/",
+  "lastmod": null
+ },
+ {
+  "sitemap": "video-sitemap.xml",
+  "loc": "https://finkeldei-online.de/rechtsanwalt/",
   "lastmod": null
  }
 ]
