@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * *"   # jede Nacht, 3 Uhr (Winterzeit) bzw. 4 Uhr (Sommerzeit)
 
 permissions:
   contents: write
