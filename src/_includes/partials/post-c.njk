@@ -1,11 +1,12 @@
 {#- Beitragsseite im Layout C: kleiner Kopf mit rundem Foto -#}
+<div data-pagefind-body><span data-pagefind-filter="typ" data-pagefind-ignore hidden>Meldung</span>
 <section class="pc-hero pc-plain pc-post">
   <div class="pc-hero-in">
     <div class="pc-text">
-      <p class="pc-kicker"><a href="/meldungen/">Meldungen</a>{% for c in postKicker %}{% if loop.first %} › {% else %} · {% endif %}<a href="{{ c.path }}">{{ c.name }}</a>{% endfor %}</p>
+      <p class="pc-kicker" data-pagefind-ignore><a href="/meldungen/">Meldungen</a>{% for c in postKicker %}{% if loop.first %} › {% else %} · {% endif %}<a href="{{ c.path }}">{{ c.name }}</a>{% endfor %}</p>
       <h1>{{ item.title | safe }}</h1>
-      <p class="pc-date"><time datetime="{{ item.date | isoDate }}">{{ item.date | dateDE }}</time></p>
-      <div class="pc-author">
+      <p class="pc-date" data-pagefind-ignore><time data-pagefind-meta="datum" datetime="{{ item.date | isoDate }}">{{ item.date | dateDE }}</time></p>
+      <div class="pc-author" data-pagefind-ignore>
         <img src="/assets/img/nils-finkeldei.webp?v={{ build.version }}" width="420" height="540" alt="{{ site.lawyer }}">
         <div><b>{{ site.lawyer }}</b><a class="pc-rev" href="{{ site.reviews.url }}" target="_blank" rel="nofollow noopener"><span class="stars" aria-label="{{ site.reviews.rating }} von 5 Sternen">★★★★★</span> {{ site.reviews.rating }} · {{ site.reviews.count }} Google-Bewertungen</a></div>
       </div>
@@ -15,10 +16,11 @@
 <div class="pc-body">
   <article class="prose pc-prose">
     {{ item.content | clean | safe }}
-    <p class="post-foot">Veröffentlicht am {{ item.date | dateDE }}{% if item.modified | isoDate != item.date | isoDate %}, aktualisiert am {{ item.modified | dateDE }}{% endif %}.</p>
+    <p class="post-foot" data-pagefind-ignore>Veröffentlicht am {{ item.date | dateDE }}{% if item.modified | isoDate != item.date | isoDate %}, aktualisiert am {{ item.modified | dateDE }}{% endif %}.</p>
     {%- if item.categories.length or item.tags.length %}
-    <p class="post-terms">{% if item.categories.length %}Kategorie: {% for c in item.categories %}<a href="{{ c.path }}">{{ c.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}{% if item.tags.length %}{% if item.categories.length %} · {% endif %}Schlagwörter: {% for t in item.tags %}<a href="{{ t.path }}">{{ t.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</p>
+    <p class="post-terms" data-pagefind-ignore>{% if item.categories.length %}Kategorie: {% for c in item.categories %}<a href="{{ c.path }}">{{ c.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}{% if item.tags.length %}{% if item.categories.length %} · {% endif %}Schlagwörter: {% for t in item.tags %}<a href="{{ t.path }}">{{ t.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</p>
     {%- endif %}
   </article>
+</div>
 </div>
 {% include "partials/page-end.njk" %}

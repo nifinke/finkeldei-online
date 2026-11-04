@@ -1,17 +1,18 @@
 {#- Textseite im Layout C (Kanzlei-Magazin). Unterzeile und Kasten kommen aus _data/pageIntro.json -#}
 {%- set intro = pageIntro[item.path] or {} %}
 {%- set plain = item.path in ['/impressum/', '/datenschutz/'] %}
+{%- if not plain %}<div data-pagefind-body><span data-pagefind-filter="typ" data-pagefind-ignore hidden>Seite</span>{% endif %}
 <section class="pc-hero{% if plain %} pc-plain{% endif %}">
   <div class="pc-hero-in">
     <div class="pc-text">
-      <p class="pc-kicker">{% if crumbs.length > 1 %}{% for c in crumbs %}{% if not loop.last %}{% if c.url %}<a href="{{ c.url }}">{{ c.label | safe }}</a>{% else %}{{ c.label | safe }}{% endif %}{% if loop.revindex > 2 %} › {% endif %}{% endif %}{% endfor %}{% else %}<a href="/">{{ site.name }}</a>{% endif %}</p>
+      <p class="pc-kicker" data-pagefind-ignore>{% if crumbs.length > 1 %}{% for c in crumbs %}{% if not loop.last %}{% if c.url %}<a href="{{ c.url }}">{{ c.label | safe }}</a>{% else %}{{ c.label | safe }}{% endif %}{% if loop.revindex > 2 %} › {% endif %}{% endif %}{% endfor %}{% else %}<a href="/">{{ site.name }}</a>{% endif %}</p>
       <h1>{{ item.title | safe }}</h1>
       {%- if intro.lead %}
       <p class="pc-lead">{{ intro.lead | safe }}</p>
       {%- endif %}
     </div>
     {%- if not plain %}
-    <div class="pc-pic">
+    <div class="pc-pic" data-pagefind-ignore>
       <img src="/assets/img/nils-finkeldei.webp?v={{ build.version }}" width="420" height="540" alt="{{ site.lawyer }}" fetchpriority="high">
       <div class="pc-cap"><b>{{ site.lawyer }}</b><a class="pc-rev" href="{{ site.reviews.url }}" target="_blank" rel="nofollow noopener"><span class="stars" aria-label="{{ site.reviews.rating }} von 5 Sternen">★★★★★</span> {{ site.reviews.rating }} · {{ site.reviews.count }} Google-Bewertungen</a></div>
     </div>
@@ -26,6 +27,7 @@
     {{ item.content | dropPhotoBox | clean | safe }}
   </article>
 </div>
+{%- if not plain %}</div>{% endif %}
 {%- if not plain %}
 {% include "partials/page-end.njk" %}
 {%- endif %}
