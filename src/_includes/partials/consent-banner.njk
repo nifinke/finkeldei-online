@@ -1,0 +1,48 @@
+{#- Cookie-Banner: Texte, Kategorien und Knöpfe wie im WP Consent Manager -#}
+<div id="wcm-banner" class="wcm-banner wcm-pos-center wcm-hidden" role="dialog" aria-modal="true" aria-label="Cookie-Einstellungen" aria-hidden="true">
+  <div class="wcm-overlay" id="wcm-overlay" aria-hidden="true"></div>
+  <div class="wcm-box">
+    <div class="wcm-main">
+      <div class="wcm-content">
+        <div class="wcm-logo logo-word" aria-hidden="true"><small>ANWALTSKANZLEI</small><b>FINKELDEI</b></div>
+        <h2 class="wcm-title">Ihre Datenschutz-Einstellungen</h2>
+        <p class="wcm-desc">Wir nutzen Cookies und ähnliche Technologien auf unserer Website und verarbeiten personenbezogene Daten über Sie. Die Datenverarbeitung kann mit Ihrer Einwilligung oder auf Basis eines berechtigten Interesses erfolgen, dem Sie in den individuellen Datenschutzeinstellungen widersprechen können. Sie können Ihre Einwilligung jederzeit widerrufen.</p>
+        <div class="wcm-meta">
+          <button type="button" id="wcm-btn-customize" class="wcm-details-toggle" aria-expanded="false" aria-controls="wcm-categories">Einstellungen anpassen <span class="wcm-arrow" aria-hidden="true">▾</span></button>
+          <span class="wcm-meta-sep" aria-hidden="true">|</span>
+          <span class="wcm-links"><a href="/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung</a><span aria-hidden="true">·</span><a href="/impressum/" target="_blank" rel="noopener">Impressum</a></span>
+        </div>
+      </div>
+      <div class="wcm-actions">
+        <button type="button" class="wcm-btn wcm-btn-deny" id="wcm-btn-reject">Alle ablehnen</button>
+        <button type="button" class="wcm-btn wcm-btn-selection" id="wcm-btn-save">Auswahl speichern</button>
+        <button type="button" class="wcm-btn wcm-btn-allow" id="wcm-btn-accept">Alle akzeptieren</button>
+      </div>
+    </div>
+    <div class="wcm-details" id="wcm-categories" hidden>
+      <div class="wcm-tab-nav" role="tablist">
+        <button type="button" class="wcm-tab-btn wcm-tab-active" role="tab" aria-selected="true" aria-controls="wcm-panel-necessary" data-tab="necessary">Notwendig</button>
+        <button type="button" class="wcm-tab-btn" role="tab" aria-selected="false" aria-controls="wcm-panel-analytics" data-tab="analytics">Statistiken</button>
+        <button type="button" class="wcm-tab-btn" role="tab" aria-selected="false" aria-controls="wcm-panel-marketing" data-tab="marketing">Marketing</button>
+        <button type="button" class="wcm-tab-btn" role="tab" aria-selected="false" aria-controls="wcm-panel-preferences" data-tab="preferences">Präferenzen</button>
+      </div>
+      <div class="wcm-tab-panel wcm-tab-panel-active" id="wcm-panel-necessary" role="tabpanel">
+        <div class="wcm-panel-inner"><p class="wcm-panel-desc">Notwendige Cookies ermöglichen grundlegende Funktionen und sind für das ordnungsgemäße Funktionieren der Website erforderlich. Die Website kann ohne diese Cookies nicht ordnungsgemäß funktionieren.</p><span class="wcm-always-on">Immer aktiv</span></div>
+      </div>
+      <div class="wcm-tab-panel" id="wcm-panel-analytics" role="tabpanel" hidden>
+        <div class="wcm-panel-inner"><p class="wcm-panel-desc">Statistik-Cookies helfen Website-Betreibern zu verstehen, wie Besucher mit der Website interagieren, indem Informationen anonym gesammelt und gemeldet werden (z. B. Google Analytics).</p><label class="wcm-switch" aria-label="Statistiken aktivieren"><input type="checkbox" id="wcm-chk-analytics" data-category="analytics"><span class="wcm-slider"></span></label></div>
+      </div>
+      <div class="wcm-tab-panel" id="wcm-panel-marketing" role="tabpanel" hidden>
+        <div class="wcm-panel-inner"><p class="wcm-panel-desc">Marketing-Cookies werden verwendet, um Besucher über Websites hinweg zu verfolgen. Die Absicht ist, Anzeigen zu schalten, die für den einzelnen Nutzer relevant sind (z. B. Google Ads).</p><label class="wcm-switch" aria-label="Marketing aktivieren"><input type="checkbox" id="wcm-chk-marketing" data-category="marketing"><span class="wcm-slider"></span></label></div>
+      </div>
+      <div class="wcm-tab-panel" id="wcm-panel-preferences" role="tabpanel" hidden>
+        <div class="wcm-panel-inner"><p class="wcm-panel-desc">Präferenz-Cookies ermöglichen es, Informationen zu speichern, die das Verhalten oder das Aussehen der Website beeinflussen, wie z. B. Ihre bevorzugte Sprache oder Region.</p><label class="wcm-switch" aria-label="Präferenzen aktivieren"><input type="checkbox" id="wcm-chk-preferences" data-category="preferences"><span class="wcm-slider"></span></label></div>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" id="wcm-reopen" class="wcm-reopen wcm-hidden" aria-label="Cookie-Einstellungen öffnen" title="Cookie-Einstellungen">
+  <svg viewBox="0 0 32 32" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M16 2a14 14 0 1 0 14 14A14.016 14.016 0 0 0 16 2Zm0 26a12 12 0 1 1 12-12 12.014 12.014 0 0 1-12 12Z"/><circle cx="11.5" cy="13" r="1.5"/><circle cx="20.5" cy="11" r="1.5"/><circle cx="20" cy="19.5" r="1.5"/><circle cx="12" cy="20" r="1"/><circle cx="16" cy="15" r="1"/></svg>
+</button>
+<script>window.wcmConfig={cookieDuration:"365",logConsents:"1",endpoint:"{{ site.consentEndpoint }}"};</script>
+<script src="/assets/js/consent.js?v={{ build.version }}" defer></script>

@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="foot">
       <span>© {{ site.name }}, Rechtsanwalt {{ site.city }} · {{ site.street }} · {{ site.zip }} {{ site.city }}</span>
-      <span>{% for item in footerNav %}<a href="{{ item.url }}">{{ item.label }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</span>
+      <span>{% for item in footerNav %}<a href="{{ item.url }}">{{ item.label }}</a>{% if not loop.last %} · {% endif %}{% endfor %} · <button type="button" class="footer-consent" data-wcm-open>Cookie-Einstellungen</button></span>
     </div>
     <div class="foot-hours">Bürozeiten: {% for h in site.openingHours %}{{ h.label }}{% if not loop.last %} · {% endif %}{% endfor %} · Termine nach Vereinbarung</div>
     <div class="foot-note">Bewertungen: Stand {{ site.reviews.asOf }}, Quelle Google-Unternehmensprofil. Die Kanzlei hat keinen Einfluss auf die Bewertungen und prüft nicht, ob sie von Mandanten stammen.</div>
