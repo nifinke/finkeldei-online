@@ -125,7 +125,7 @@
   function showDebug(update, note) {
     if (LIVE) return;
     if (!dbg) {
-      dbg = document.createElement('div'); dbg.className = 'wcm-debug'; dbg.setAttribute('role', 'status');
+      dbg = document.createElement('div'); dbg.className = 'wcm-debug'; dbg.setAttribute('role', 'status'); dbg.title = 'Antippen zum Ausblenden'; dbg.addEventListener('click', function () { dbg.style.display = 'none'; });
       document.body.appendChild(dbg);
     }
     if (update) {
