@@ -444,3 +444,27 @@ body:has(.pc-pic,.pc-author) .stars-mini{display:none}
 .fx-success{background:#e6f4ec;color:var(--green);border-radius:14px;padding:18px 16px;font-size:17px}
 .fx-hp{position:absolute!important;left:-10000px;width:1px;height:1px;overflow:hidden}
 @media (min-width:700px){.fx-form{padding:24px 26px}.fx-submit{width:auto;padding:12px 28px}}
+
+/* ===== Kostenrechner Scheidung ===== */
+.kr{margin:1.2em 0 1.6em;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:18px 16px;font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-height:1.55;color:var(--ink)}
+.kr p{margin:0 0 .8em}
+.kr .kr-help{font-size:14.5px;color:var(--muted)}
+.kr-row{display:grid;gap:12px;margin:14px 0 4px}
+.kr-field{display:block;margin:0 0 14px}
+.kr-field>span{display:block;font-weight:600;color:var(--navy);margin:0 0 6px}
+.kr input,.kr select{width:100%;font:inherit;font-size:17px;padding:12px 14px;border:1.5px solid #c9d3de;border-radius:10px;background:#fff;color:var(--ink);min-height:52px}
+.kr input:focus,.kr select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(47,120,196,.18)}
+.kr-more{margin:0 0 8px;font-size:14.5px;color:var(--muted)}
+.kr-more summary{cursor:pointer;color:var(--blue);font-weight:600;padding:4px 0}
+.kr-more p{margin:.6em 0 0}
+.kr-result{border-top:1px solid var(--line);margin-top:8px;padding-top:16px}
+.kr-title{font-weight:700;color:var(--navy);font-size:18px}
+.kr-sums{margin:0 0 12px;display:grid;gap:10px}
+.kr-sums>div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.kr-sums dt{font-weight:700;color:var(--navy);margin:0 0 4px}
+.kr-sums dd{margin:0;font-size:14.5px;color:var(--muted)}
+.kr-sums b{display:block;font-size:24px;color:var(--navy);margin:4px 0 6px;font-family:Georgia,"Times New Roman",serif;font-weight:400}
+.kr-sums .kr-total{background:var(--navy);border-color:var(--navy)}
+.kr-sums .kr-total dt,.kr-sums .kr-total dd,.kr-sums .kr-total b{color:#fff}
+.kr-over{background:#fff7d6;border-radius:10px;padding:12px 14px;color:#6b5400}
+@media (min-width:700px){.kr{padding:24px 26px}.kr-row{grid-template-columns:1fr 1fr}}
