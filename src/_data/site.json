@@ -43,5 +43,6 @@
       "label": "Fr. 8.30 bis 13.00 Uhr"
     }
   ],
-  "consentEndpoint": "https://finkeldei-online.de/wp-json/finkeldei/v1/consent"
+  "consentEndpoint": "https://finkeldei-online.de/wp-json/finkeldei/v1/consent",
+  "formEndpoint": "https://finkeldei-online.de/wp-json/finkeldei/v1/anfrage"
 }
