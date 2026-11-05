@@ -2,6 +2,7 @@
 import * as cheerio from "cheerio";
 import { readFileSync, existsSync } from "node:fs";
 import { REDIRECTS } from "./wp-const.mjs";
+import { formHtml } from "./forms.mjs";
 
 const HOSTS = /^https?:\/\/(www\.)?finkeldei-online\.de/i;
 
@@ -23,15 +24,22 @@ export const report = { oldLinks: [] };
 export function cleanContent(html) {
   const $ = cheerio.load(html, null, false);
 
-  // Contact Form 7: kommt in Phase 3 als eigenes Formular
-  $(".wpcf7").replaceWith('<div class="placeholder">Kontaktformular – wird in Phase 3 eingebaut.</div>');
-
-  // Kostenrechner (FormCraft): wird in Phase 3 als eigener Rechner gebaut
+  // Formulare: Contact Form 7, FormCraft-Anfragen und Thrive-Formular werden durch eigene Formulare ersetzt
+  // (Platzhalter hier, Einbau am Ende, damit die Bereinigung sie nicht verändert)
+  $(".wpcf7").replaceWith('<div data-fx-slot="kontakt"></div>');
   $("form").each((_, f) => {
     const top = $(f).closest(".formcraft-css");
-    (top.length ? top : $(f)).replaceWith('<div class="formcraft-css"></div>');
+    const cls = $(f).attr("class") || "";
+    const slot = /fc-form-3\b/.test(cls) ? "verkehrsrecht" : /fc-form-5\b/.test(cls) ? "arbeitsrecht" : null;
+    (top.length ? top : $(f)).replaceWith(slot ? `<div data-fx-slot="${slot}"></div>` : '<div class="formcraft-css"></div>');
   });
+  // Kostenrechner (FormCraft): wird in Phase 3 als eigener Rechner gebaut
   $(".formcraft-css").replaceWith('<div class="placeholder">Kostenrechner – wird in Phase 3 eingebaut.</div>');
+  // Thrive-Formular „Schreiben Sie uns“ (steht im Inhalt nur als Überschrift)
+  $("*").filter((_, e) => $(e).children().length === 0 && $(e).text().trim() === "Schreiben Sie uns").each((_, e) => {
+    const block = $(e).closest(".thrv_wrapper").length ? $(e).closest(".thrv_wrapper") : $(e);
+    block.after('<div data-fx-slot="nachricht"></div>');
+  });
 
   // Videos (Videopack): schlichtes HTML5-Video in 1080p/720p, lädt erst beim Abspielen
   $(".kgvid_wrapper").each((_, w) => {
@@ -75,6 +83,9 @@ export function cleanContent(html) {
 
   // Leere Absätze aus dem alten Editor
   $("p").each((_, p) => { if (!$(p).text().trim() && !$(p).find("img,iframe,video,a").length) $(p).remove(); });
+
+  // Formulare einsetzen
+  $("[data-fx-slot]").each((_, d) => { $(d).replaceWith(formHtml($(d).attr("data-fx-slot"))); });
 
   return $.html();
 }
