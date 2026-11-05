@@ -3,6 +3,7 @@ import * as cheerio from "cheerio";
 import { readFileSync, existsSync } from "node:fs";
 import { REDIRECTS } from "./wp-const.mjs";
 import { formHtml } from "./forms.mjs";
+import { calculatorHtml } from "./calculator.mjs";
 
 const HOSTS = /^https?:\/\/(www\.)?finkeldei-online\.de/i;
 
@@ -30,7 +31,7 @@ export function cleanContent(html) {
   $("form").each((_, f) => {
     const top = $(f).closest(".formcraft-css");
     const cls = $(f).attr("class") || "";
-    const slot = /fc-form-3\b/.test(cls) ? "verkehrsrecht" : /fc-form-5\b/.test(cls) ? "arbeitsrecht" : null;
+    const slot = /fc-form-3\b/.test(cls) ? "verkehrsrecht" : /fc-form-5\b/.test(cls) ? "arbeitsrecht" : /fc-form-4\b/.test(cls) ? "kostenrechner" : null;
     (top.length ? top : $(f)).replaceWith(slot ? `<div data-fx-slot="${slot}"></div>` : '<div class="formcraft-css"></div>');
   });
   // Kostenrechner (FormCraft): wird in Phase 3 als eigener Rechner gebaut
@@ -85,7 +86,7 @@ export function cleanContent(html) {
   $("p").each((_, p) => { if (!$(p).text().trim() && !$(p).find("img,iframe,video,a").length) $(p).remove(); });
 
   // Formulare einsetzen
-  $("[data-fx-slot]").each((_, d) => { $(d).replaceWith(formHtml($(d).attr("data-fx-slot"))); });
+  $("[data-fx-slot]").each((_, d) => { const k = $(d).attr("data-fx-slot"); $(d).replaceWith(k === "kostenrechner" ? calculatorHtml() : formHtml(k)); });
 
   return $.html();
 }
