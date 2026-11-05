@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{% include "partials/consent-head.njk" %}
 <title>{{ seo.title }}</title>
 {%- if seo.description %}
 <meta name="description" content="{{ seo.description }}">
@@ -55,5 +56,6 @@
 </main>
 {% include "partials/footer.njk" %}
 <div class="callbar"><a class="btn btn-navy" href="tel:{{ site.phoneHref }}">📞 Anrufen</a><a class="btn btn-line" href="mailto:{{ site.email }}">✉️ E-Mail</a></div>
+{% include "partials/consent-banner.njk" %}
 </body>
 </html>
