@@ -57,5 +57,7 @@
 {% include "partials/footer.njk" %}
 <div class="callbar"><a class="btn btn-navy" href="tel:{{ site.phoneHref }}">📞 Anrufen</a><a class="btn btn-line" href="mailto:{{ site.email }}">✉️ E-Mail</a></div>
 {% include "partials/consent-banner.njk" %}
+<script>window.fxConfig={endpoint:"{{ site.formEndpoint }}"};</script>
+<script src="/assets/js/forms.js?v={{ build.version }}" defer></script>
 </body>
 </html>
