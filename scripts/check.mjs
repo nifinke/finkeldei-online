@@ -96,9 +96,23 @@ for (const r of videoRows) {
   if (!html.includes('"VideoObject"')) { r.issues.push("keine VideoObject-Angabe"); r.status = "abweichend"; }
 }
 
+// Landingpages: jede Frage aus der Live-Fassung muss mit Antwort auf der neuen Seite stehen
+const faqRows = [];
+for (const lp of ["/verkehrsrecht/rechtsanwalt-verkehrsrecht/", "/arbeitsrecht/rechtsanwalt-arbeitsrecht/", "/familienrecht/scheidung/scheidungsanwalt/"]) {
+  const liveFile = `data/live/${lp.replace(/^\/|\/$/g, "").replace(/\//g, "_")}.html`;
+  if (!existsSync(liveFile) || !existsSync(fileFor(lp))) continue;
+  const $l = cheerio.load(readFileSync(liveFile, "utf8"));
+  const $n = cheerio.load(readFileSync(fileFor(lp), "utf8"));
+  const norm = (t) => t.replace(/\s+/g, " ").trim();
+  const built = $n("details.lp-q").map((_, d) => ({ q: norm($n(d).children("summary").text()), a: norm($n(d).find(".lp-a").text()) })).get();
+  const live = $l(".thrv_toggle_item").map((_, it) => norm($l(it).find(".thrv_toggle_title").first().text())).get();
+  const missing = live.filter((q) => !built.some((b) => b.q === q && b.a.length > 20));
+  faqRows.push({ path: lp, live: live.length, built: built.length, missing });
+}
+
 const count = (s) => rows.filter((r) => r.status === s).length;
-const summary = { geprueft: rows.length, ok: count("ok"), abweichend: count("abweichend"), fehlt: count("fehlt"), geplant: count("geplant"), toteLinks: deadList.length, videos: videoRows.length, videosAbweichend: videoRows.filter((r) => r.status === "abweichend").length };
-writeFileSync("pruefbericht.json", JSON.stringify({ summary, rows, dead: deadList, videos: videoRows }, null, 1));
+const summary = { geprueft: rows.length, ok: count("ok"), abweichend: count("abweichend"), fehlt: count("fehlt"), geplant: count("geplant"), toteLinks: deadList.length, videos: videoRows.length, videosAbweichend: videoRows.filter((r) => r.status === "abweichend").length, fragenFehlen: faqRows.reduce((n, r) => n + r.missing.length, 0) };
+writeFileSync("pruefbericht.json", JSON.stringify({ summary, rows, dead: deadList, videos: videoRows, faq: faqRows }, null, 1));
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
 const tr = (r) => `<tr><td><a href="${esc(r.path)}">${esc(r.path)}</a></td><td>${r.status}</td><td>${esc([r.note, ...r.issues].filter(Boolean).join(" · "))}</td></tr>`;
@@ -110,5 +124,6 @@ writeFileSync(join(OUT, "pruefbericht", "index.html"), `<!doctype html><html lan
 <h2>Abweichungen und geplante Änderungen</h2><table><tr><th>Adresse</th><th>Status</th><th>Hinweis</th></tr>${rows.filter((r) => r.status !== "ok").map(tr).join("")}</table>
 <h2>Tote interne Links</h2><table><tr><th>Ziel</th><th>Anzahl Seiten</th><th>z. B. auf</th></tr>${deadList.map((d) => `<tr><td>${esc(d.path)}</td><td>${d.count}</td><td>${d.from.map(esc).join("<br>")}</td></tr>`).join("") || "<tr><td colspan=3>keine</td></tr>"}</table>
 <h2>Video-Sitemap</h2><table><tr><th>Seite</th><th>Video</th><th>Status</th><th>Hinweis</th></tr>${videoRows.map((v) => `<tr><td><a href="${esc(v.path)}">${esc(v.path)}</a></td><td>${esc(v.file)}</td><td>${v.status}</td><td>${esc(v.issues.join(" · "))}</td></tr>`).join("") || "<tr><td colspan=4>keine Videos</td></tr>"}</table>
+<h2>Häufige Fragen der Landingpages</h2><table><tr><th>Seite</th><th>Fragen live</th><th>Fragen neu</th><th>fehlend oder ohne Antwort</th></tr>${faqRows.map((f) => `<tr><td><a href="${esc(f.path)}">${esc(f.path)}</a></td><td>${f.live}</td><td>${f.built}</td><td>${esc(f.missing.join(" · ") || "keine")}</td></tr>`).join("")}</table>
 <h2>Alle Adressen</h2><table><tr><th>Adresse</th><th>Status</th><th>Hinweis</th></tr>${rows.map(tr).join("")}</table></body></html>`);
 console.log(summary);
