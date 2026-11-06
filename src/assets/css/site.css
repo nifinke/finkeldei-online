@@ -468,3 +468,29 @@ body:has(.pc-pic,.pc-author) .stars-mini{display:none}
 .kr-sums .kr-total dt,.kr-sums .kr-total dd,.kr-sums .kr-total b{color:#fff}
 .kr-over{background:#fff7d6;border-radius:10px;padding:12px 14px;color:#6b5400}
 @media (min-width:700px){.kr{padding:24px 26px}.kr-row{grid-template-columns:1fr 1fr}}
+
+/* ===== Landingpages (RA Verkehrsrecht, RA Arbeitsrecht, Scheidungsanwalt) ===== */
+.lp-sub{font-size:15px!important;opacity:.8}
+.lp-reviews{display:grid;gap:12px;margin:0 0 1.2em}
+.lp-review{margin:0;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.lp-review blockquote{margin:0;padding:0;border:0;background:none;font-size:16.5px;line-height:1.55}
+.lp-review blockquote p{margin:0 0 .4em}
+.lp-review figcaption{font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:14px;color:var(--muted)}
+.lp-review figcaption b{color:var(--navy)}
+.lp-cards{display:grid;gap:12px;margin:0 0 1.2em}
+.lp-card{background:#fff;border:1px solid var(--line);border-top:3px solid var(--blue);border-radius:12px;padding:14px 16px;font-size:16.5px;line-height:1.55}
+.lp-card h3{margin:0 0 .4em!important;font-size:18px}
+.lp-card p{margin:0 0 .5em}
+.lp-steps{list-style:none;padding:0!important;margin:0 0 1.2em;display:grid;gap:12px}
+.lp-steps li{display:flex;gap:14px;align-items:flex-start;background:var(--bg);border-radius:12px;padding:14px 16px;margin:0}
+.lp-num{flex:none;width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-weight:700;font-size:15px}
+.lp-steps p{margin:0 0 .4em;font-size:16.5px}
+.lp-faq{display:grid;gap:10px;margin:0 0 1.4em}
+.lp-q{border:1px solid var(--line);border-radius:12px;background:#fff}
+.lp-q summary{list-style:none;cursor:pointer;padding:14px 44px 14px 16px;min-height:52px;font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-weight:700;color:var(--navy);font-size:16px;line-height:1.4;position:relative}
+.lp-q summary::-webkit-details-marker{display:none}
+.lp-q summary::after{content:"+";position:absolute;right:16px;top:12px;font-size:24px;font-weight:400;color:var(--blue)}
+.lp-q[open] summary::after{content:"–"}
+.lp-a{padding:0 16px 8px;font-size:16.5px}
+.lp-video{display:inline-flex;font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-decoration:none}
+@media (min-width:700px){.lp-reviews{grid-template-columns:repeat(3,1fr)}.lp-cards{grid-template-columns:repeat(3,1fr)}}
