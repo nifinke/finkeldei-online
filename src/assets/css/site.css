@@ -494,3 +494,4 @@ body:has(.pc-pic,.pc-author) .stars-mini{display:none}
 .lp-a{padding:0 16px 8px;font-size:16.5px}
 .lp-video{display:inline-flex;font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;text-decoration:none}
 @media (min-width:700px){.lp-reviews{grid-template-columns:repeat(3,1fr)}.lp-cards{grid-template-columns:repeat(3,1fr)}}
+.lp-player{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:12px;background:#0f2742;margin:0 0 1.4em}
