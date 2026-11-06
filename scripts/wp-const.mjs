@@ -1,6 +1,16 @@
 // Gemeinsame Festlegungen für Daten, Sitemaps und Prüfung
 // Eigene Vorlagen (Startseite, Meldungsübersicht, Scheidungs-Landingpage, Thrive-Landingpages)
 export const LANDINGS = ["/verkehrsrecht/rechtsanwalt-verkehrsrecht/", "/arbeitsrecht/rechtsanwalt-arbeitsrecht/", "/familienrecht/scheidung/scheidungsanwalt/"];
+
+// Eigene Videos (Mediathek), ersetzen frühere YouTube-Einbettungen
+export const LANDING_VIDEOS = {
+  "/familienrecht/scheidung/scheidungsanwalt/": {
+    src: "https://finkeldei-online.de/wp-content/uploads/2026/11/Scheidungsanwalt.mp4",
+    poster: "https://finkeldei-online.de/wp-content/uploads/2026/11/Scheidungsanwalt_thumb1.jpg",
+    width: 1280, height: 720, duration: 63, uploadDate: "2026-11-06T17:19:02+01:00",
+  },
+};
+
 export const OWN_TEMPLATE = new Set(["/", "/meldungen/", "/trennung-scheidung-unterhalt-zugewinn-sorgerecht-hausrat-versorgungsausgleich/", ...LANDINGS]);
 // Entfallen, werden beim Umschalten weitergeleitet
 export const DROPPED = new Set(["/apprentice-registration-page/", "/blog/"]);
