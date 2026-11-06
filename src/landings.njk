@@ -44,7 +44,9 @@ layout: layouts/base.njk
     {% fxform landing.form %}
   {%- endif %}
 
-  {%- if landing.youtube %}
+  {%- if landing.video %}
+    <video class="lp-player" controls preload="none" playsinline width="{{ landing.video.width }}" height="{{ landing.video.height }}" poster="{{ landing.video.poster }}" src="{{ landing.video.src }}"></video>
+  {%- elif landing.youtube %}
     <p><a class="btn btn-line lp-video" href="{{ landing.youtube }}" target="_blank" rel="noopener">▶ Video auf YouTube ansehen</a></p>
   {%- endif %}
 
