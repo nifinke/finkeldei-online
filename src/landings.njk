@@ -1,0 +1,104 @@
+---
+pagination:
+  data: landings
+  size: 1
+  alias: landing
+permalink: "{{ landing.path }}"
+layout: layouts/base.njk
+---
+{#- Thrive-Landingpages im Layout C; Inhalte aus der Live-Fassung (scripts/landing.mjs) -#}
+{%- set intro = pageIntro[landing.path] or {} %}
+<div data-pagefind-body><span data-pagefind-filter="typ" data-pagefind-ignore hidden>Seite</span>
+<section class="pc-hero">
+  <div class="pc-hero-in">
+    <div class="pc-text">
+      <p class="pc-kicker" data-pagefind-ignore>{% for c in crumbs %}{% if not loop.last %}{% if c.url %}<a href="{{ c.url }}">{{ c.label | safe }}</a>{% else %}{{ c.label | safe }}{% endif %}{% if loop.revindex > 2 %} › {% endif %}{% endif %}{% endfor %}</p>
+      <h1>{{ item.title | safe }}</h1>
+      <p class="pc-lead">{{ (intro.lead or landing.heroLines[0]) | safe }}</p>
+      {%- if not intro.lead and landing.heroLines[1] %}<p class="pc-lead lp-sub">{{ landing.heroLines[1] }}</p>{% endif %}
+      <div class="pc-cta">
+        <a class="btn btn-primary" href="tel:{{ site.freephoneHref }}">📞 Kostenfrei: {{ site.freephone }}</a>
+        {%- if landing.form %}
+        <a class="btn btn-ghost" href="#Beauftragen">Online anfragen ↓</a>
+        {%- else %}
+        <a class="btn btn-ghost" href="https://scheidung-digital.de">Scheidung online einleiten →</a>
+        {%- endif %}
+      </div>
+    </div>
+    <div class="pc-pic" data-pagefind-ignore>
+      <img src="/assets/img/nils-finkeldei.webp?v={{ build.version }}" width="420" height="540" alt="{{ site.lawyer }}" fetchpriority="high">
+      <div class="pc-cap"><b>{{ site.lawyer }}</b><a class="pc-rev" href="{{ site.reviews.url }}" target="_blank" rel="nofollow noopener"><span class="stars" aria-label="{{ site.reviews.rating }} von 5 Sternen">★★★★★</span> {{ site.reviews.rating }} · {{ site.reviews.count }} Google-Bewertungen</a></div>
+    </div>
+  </div>
+</section>
+
+<div class="pc-body">
+  {%- if intro.facts and intro.facts.length %}
+  <div class="pc-facts"><b>Das Wichtigste in Kürze</b><ul>{% for f in intro.facts %}<li>{{ f | safe }}</li>{% endfor %}</ul></div>
+  {%- endif %}
+
+  <div class="prose pc-prose">
+  {%- if landing.form %}
+    <h2 id="Beauftragen">Oder online Kontakt aufnehmen:</h2>
+    <p><strong>Ausfüllen, absenden, angerufen werden:</strong> Kosten entstehen hierdurch noch nicht!</p>
+    {% fxform landing.form %}
+  {%- endif %}
+
+  {%- if landing.youtube %}
+    <p><a class="btn btn-line lp-video" href="{{ landing.youtube }}" target="_blank" rel="noopener">▶ Video auf YouTube ansehen</a></p>
+  {%- endif %}
+
+  {%- if landing.reviews.length %}
+    <h2>Was Mandanten sagen</h2>
+    <p><a href="{{ site.reviews.url }}" target="_blank" rel="nofollow noopener"><span class="stars">★★★★★</span> {{ site.reviews.rating }} · {{ site.reviews.count }} Google-Bewertungen – alle Bewertungen ansehen</a></p>
+    <div class="lp-reviews">
+      {%- for r in landing.reviews %}
+      <figure class="lp-review"><blockquote>{% for l in r.lines %}<p>{{ l }}</p>{% endfor %}</blockquote><figcaption><b>{{ r.name }}</b>{% if r.portal %} · auf {{ r.portal }}{% endif %}</figcaption></figure>
+      {%- endfor %}
+    </div>
+  {%- endif %}
+
+  {%- if landing.tips.length %}
+    <h2>Wichtige Tipps</h2>
+    <div class="lp-cards">
+      {%- for t in landing.tips %}<div class="lp-card"><h3>{{ t.title }}</h3>{{ t.html | safe }}</div>{% endfor %}
+    </div>
+  {%- endif %}
+
+  {%- if landing.steps.length %}
+    <h2>So einfach geht's</h2>
+    <ol class="lp-steps">
+      {%- for s in landing.steps %}<li><span class="lp-num">{{ s.num }}</span><div>{% for l in s.lines %}<p>{{ l }}</p>{% endfor %}</div></li>{% endfor %}
+    </ol>
+  {%- endif %}
+
+  {%- if landing.eakte.paras.length %}
+    <h2>{{ landing.eakte.title }}</h2>
+    {%- for p in landing.eakte.paras %}<p>{{ p }}</p>{% endfor %}
+    {%- if landing.eakte.link %}<p><a href="{{ landing.eakte.link }}">{{ landing.eakte.linkText or "Mehr zur eAkte" }} →</a></p>{% endif %}
+  {%- endif %}
+
+  {%- if landing.faq.length %}
+    <h2>Häufige Fragen</h2>
+    <div class="lp-faq">
+      {%- for f in landing.faq %}
+      <details class="lp-q"><summary>{{ f.q }}</summary><div class="lp-a">{{ f.html | safe }}{{ f.calc | safe }}</div></details>
+      {%- endfor %}
+    </div>
+  {%- endif %}
+
+    <h2>Unsere Kontaktdaten</h2>
+    <p>{{ site.name }}, Rechtsanwalt {{ site.city }}<br>{{ site.street }}<br>{{ site.zip }} {{ site.city }}<br><a href="tel:{{ site.phoneHref }}">{{ site.phone }}</a><br><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+    <h2 id="schreiben">Schreiben Sie uns</h2>
+    {% fxform "nachricht" %}
+  </div>
+</div>
+</div>
+{% include "partials/page-end.njk" %}
+{%- if landing.faq.length %}
+<script type="application/ld+json">{{ {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": landing.faq | faqSchema
+} | json | safe }}</script>
+{%- endif %}
