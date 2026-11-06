@@ -1,5 +1,6 @@
 import { cleanContent } from "./scripts/clean-content.mjs";
 import * as cheerio from "cheerio";
+import { formHtml } from "./scripts/forms.mjs";
 
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
@@ -15,6 +16,8 @@ export default function (eleventyConfig) {
     });
     return $.html();
   });
+  eleventyConfig.addFilter("faqSchema", (faq) => (faq || []).map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.plain } })));
+  eleventyConfig.addShortcode("fxform", (kind) => formHtml(kind));
   eleventyConfig.addFilter("json", (v) => JSON.stringify(v));
   eleventyConfig.addFilter("dateDE", (iso) =>
     new Date(iso).toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" }));
