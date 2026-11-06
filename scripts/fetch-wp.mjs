@@ -77,7 +77,8 @@ if (videoMap) {
 await writeFile("data/videos.json", JSON.stringify(videos, null, 1));
 
 // Seiten mit Thrive-Layout: gerenderte Fassung als Vorlage für den Nachbau
-for (const path of ["/", "/rechtsanwalt/", "/kanzlei/", "/bewerten/", "/trennung-scheidung-unterhalt-zugewinn-sorgerecht-hausrat-versorgungsausgleich/"]) {
+for (const path of ["/", "/rechtsanwalt/", "/kanzlei/", "/bewerten/", "/trennung-scheidung-unterhalt-zugewinn-sorgerecht-hausrat-versorgungsausgleich/",
+  "/verkehrsrecht/rechtsanwalt-verkehrsrecht/", "/arbeitsrecht/rechtsanwalt-arbeitsrecht/", "/familienrecht/scheidung/scheidungsanwalt/"]) {
   const r = await get(SITE + path, true);
   if (r) await writeFile(`data/live/${path.replace(/^\/|\/$/g, "").replace(/\//g, "_") || "startseite"}.html`, r.body);
 }
