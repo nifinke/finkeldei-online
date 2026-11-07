@@ -4,7 +4,9 @@ import { writeFile, mkdir } from "node:fs/promises";
 
 const SITE = process.env.WP_SITE || "https://finkeldei-online.de";
 const API = `${SITE}/wp-json/wp/v2`;
-const HEADERS = { "User-Agent": "finkeldei-online-build (GitHub Actions)", Accept: "application/json" };
+// X-Finkeldei-Bau: Nach der Umschaltung beantwortet sonst die statische Website die Seitenaufrufe.
+// Mit diesem Header gehen sie weiter an WordPress (Thrive-Landingpages, Yoast-Sitemaps); siehe Haupt-.htaccess.
+const HEADERS = { "User-Agent": "finkeldei-online-build (GitHub Actions)", Accept: "application/json", "X-Finkeldei-Bau": "1" };
 const FIELDS = "id,type,slug,link,status,title,content,excerpt,date,modified,parent,menu_order,categories,tags,featured_media,template,yoast_head_json";
 
 async function get(url, asText = false) {
