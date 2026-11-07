@@ -14,7 +14,9 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # Laufende Bauten nicht abbrechen (ein Abbruch mitten im Hochladen ließe die Website halb aktualisiert);
+  # weitere Anstöße warten, nur der jüngste wartende wird ausgeführt.
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -44,6 +46,21 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _preview
+      # Echte Fassung für All-Inkl: ohne Vorschau-Banner, mit Prüfbericht als Sperre
+      - name: Website für All-Inkl bauen und prüfen
+        id: release
+        continue-on-error: true
+        run: rm -rf _site && npm run release
+      - name: Website für All-Inkl bereitstellen
+        if: steps.release.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: website
+          path: _site
+          include-hidden-files: true
+          retention-days: 7
+    outputs:
+      release: ${{ steps.release.outcome }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -53,3 +70,34 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Hochladen zu All-Inkl (Ordner /website/) per FTP mit TLS – nur wenn die Zugangsdaten hinterlegt sind
+  upload:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Zugangsdaten vorhanden?
+        id: creds
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+        run: echo "ok=$([ -n "$FTP_SERVER" ] && echo yes || echo no)" >> "$GITHUB_OUTPUT"
+      - name: Sperre durch den Prüfbericht
+        if: steps.creds.outputs.ok == 'yes' && needs.build.outputs.release != 'success'
+        run: |
+          echo "::error::Hochladen gesperrt – der Prüfbericht ist nicht sauber (Details im Schritt „Website für All-Inkl bauen und prüfen“)."
+          exit 1
+      - uses: actions/download-artifact@v4
+        if: steps.creds.outputs.ok == 'yes'
+        with:
+          name: website
+          path: _site
+      - name: Zu All-Inkl hochladen (nur geänderte Dateien)
+        if: steps.creds.outputs.ok == 'yes'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./_site/
+          server-dir: ./
