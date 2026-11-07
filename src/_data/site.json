@@ -1,6 +1,7 @@
 {
   "url": "https://finkeldei-online.de",
   "name": "Anwaltskanzlei Finkeldei",
+  "seoName": "Anwaltskanzlei Finkeldei, Rechtsanwalt Bottrop",
   "lawyer": "Rechtsanwalt Nils Finkeldei",
   "street": "Gladbecker Straße 29",
   "zip": "46236",
@@ -44,5 +45,8 @@
     }
   ],
   "consentEndpoint": "https://finkeldei-online.de/wp-json/finkeldei/v1/consent",
-  "formEndpoint": "https://finkeldei-online.de/wp-json/finkeldei/v1/anfrage"
+  "formEndpoint": "https://finkeldei-online.de/wp-json/finkeldei/v1/anfrage",
+  "googleVerification": "ZttX9WPiJ_JhoBDz70QbMir06xv25w3JqLhfR4VLH7A",
+  "favicon": "https://finkeldei-online.de/wp-content/uploads/2021/01/favicon.png",
+  "twitter": "@nfinkeldei"
 }
