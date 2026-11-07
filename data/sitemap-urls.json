@@ -2,7 +2,7 @@
  {
   "sitemap": "post-sitemap.xml",
   "loc": "https://finkeldei-online.de/meldungen/",
-  "lastmod": "2026-11-07T09:03:21+00:00"
+  "lastmod": "2026-11-07T09:03:58+00:00"
  },
  {
   "sitemap": "post-sitemap.xml",
@@ -1496,11 +1496,6 @@
  },
  {
   "sitemap": "post-sitemap.xml",
-  "loc": "https://finkeldei-online.de/aufhebungsvertrag-2026-risiken-rechte-kennen/",
-  "lastmod": "2026-11-01T22:15:32+00:00"
- },
- {
-  "sitemap": "post-sitemap.xml",
   "loc": "https://finkeldei-online.de/versorgungsausgleich-2026-so-schuetzen-sie-ihre-rente/",
   "lastmod": "2026-11-01T22:15:33+00:00"
  },
@@ -1533,6 +1528,11 @@
   "sitemap": "post-sitemap.xml",
   "loc": "https://finkeldei-online.de/pendlerpauschale-verfasungswidrig/",
   "lastmod": "2026-11-07T09:03:21+00:00"
+ },
+ {
+  "sitemap": "post-sitemap.xml",
+  "loc": "https://finkeldei-online.de/aufhebungsvertrag-2026-risiken-rechte-kennen/",
+  "lastmod": "2026-11-07T09:03:58+00:00"
  },
  {
   "sitemap": "page-sitemap.xml",
@@ -1578,16 +1578,6 @@
   "sitemap": "page-sitemap.xml",
   "loc": "https://finkeldei-online.de/verkehrsrecht/kfz-finanzierung-widerrufen/",
   "lastmod": "2024-01-31T23:00:23+00:00"
- },
- {
-  "sitemap": "page-sitemap.xml",
-  "loc": "https://finkeldei-online.de/abmahnung/",
-  "lastmod": "2024-01-31T23:01:17+00:00"
- },
- {
-  "sitemap": "page-sitemap.xml",
-  "loc": "https://finkeldei-online.de/entschaedigung-bei-flugverspaetung/",
-  "lastmod": "2024-01-31T23:01:38+00:00"
  },
  {
   "sitemap": "page-sitemap.xml",
@@ -1718,6 +1708,16 @@
   "sitemap": "page-sitemap.xml",
   "loc": "https://finkeldei-online.de/familienrecht/unterhalt/",
   "lastmod": "2026-11-04T21:56:18+00:00"
+ },
+ {
+  "sitemap": "page-sitemap.xml",
+  "loc": "https://finkeldei-online.de/abmahnung/",
+  "lastmod": "2026-11-07T09:04:29+00:00"
+ },
+ {
+  "sitemap": "page-sitemap.xml",
+  "loc": "https://finkeldei-online.de/entschaedigung-bei-flugverspaetung/",
+  "lastmod": "2026-11-07T09:04:57+00:00"
  },
  {
   "sitemap": "video-sitemap.xml",
