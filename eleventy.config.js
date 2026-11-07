@@ -7,8 +7,6 @@ import { formHtml } from "./scripts/forms.mjs";
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/robots.txt": "robots.txt" });
-  // Serverregeln für den Ordner /website/ bei All-Inkl
-  eleventyConfig.addPassthroughCopy({ "src/website.htaccess": ".htaccess" });
   // Seitensymbol auch unter /favicon.ico (Browser fragen diese Adresse direkt ab)
   if (existsSync("data/media/favicon.png")) eleventyConfig.addPassthroughCopy({ "data/media/favicon.png": "favicon.ico" });
   eleventyConfig.addFilter("clean", (html) => cleanContent(html || ""));
