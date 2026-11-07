@@ -1,0 +1,40 @@
+---
+layout: layouts/base.njk
+permalink: /404.html
+eleventyExcludeFromCollections: true
+seo:
+  title: "Seite nicht gefunden – Anwaltskanzlei Finkeldei"
+  description: "Die aufgerufene Seite gibt es nicht (mehr)."
+  robots:
+    index: noindex
+    follow: follow
+---
+{#- Fehlerseite für nicht vorhandene Adressen (Webserver: ErrorDocument 404 /404.html) -#}
+<section class="pc-hero pc-plain pc-post">
+  <div class="pc-hero-in">
+    <div class="pc-text">
+      <p class="pc-kicker"><a href="/">{{ site.name }}</a></p>
+      <h1>Diese Seite gibt es nicht (mehr)</h1>
+      <p class="pc-lead">Vielleicht wurde sie verschoben oder die Adresse ist nicht ganz richtig. Suchen Sie hier nach Ihrem Thema:</p>
+      <form class="sx-form" role="search" action="/suche/" method="get">
+        <label for="nf-q" class="sx-label">Suchbegriff</label>
+        <input id="nf-q" name="q" type="search" placeholder="z. B. Kündigung, Bußgeld, Unterhalt" autocomplete="off" enterkeyhint="search">
+      </form>
+    </div>
+  </div>
+</section>
+<div class="pc-body">
+  <h2>Häufig gesucht</h2>
+  <ul>
+    <li><a href="/verkehrsrecht/">Verkehrsrecht</a> – Bußgeld, Fahrverbot, Verkehrsunfall</li>
+    <li><a href="/arbeitsrecht/">Arbeitsrecht</a> – Kündigung, Abfindung, Arbeitszeugnis</li>
+    <li><a href="/familienrecht/">Familienrecht</a> – Trennung, Scheidung, Unterhalt</li>
+    <li><a href="/meldungen/">Aktuelle Meldungen</a></li>
+    <li><a href="/kontakt/">Kontakt</a> – {{ site.phone }}</li>
+  </ul>
+  <p><a class="btn btn-navy" href="/">Zur Startseite</a></p>
+</div>
+<script>
+/* Suchfeld mit den Wörtern aus der aufgerufenen Adresse vorbelegen */
+(function(){var w=decodeURIComponent(location.pathname).split('/').filter(Boolean).pop()||'';w=w.replace(/\.[a-z0-9]+$/i,'').replace(/[-_]+/g,' ').trim();var i=document.getElementById('nf-q');if(i&&w&&!/^\d+$/.test(w))i.value=w;})();
+</script>
