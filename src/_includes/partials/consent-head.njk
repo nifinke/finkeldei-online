@@ -15,8 +15,26 @@ var g=function(b){return b?'granted':'denied';};
 gtag('consent','update',{'analytics_storage':g(c.analytics),'ad_storage':g(c.marketing),'ad_user_data':g(c.marketing),'ad_personalization':g(c.marketing),'functionality_storage':g(c.preferences),'personalization_storage':g(c.preferences),'security_storage':'granted'});}catch(e){}})();
 </script>
 <script>
-/* Google Tag Manager – nur auf der echten Domain, nicht in der Testversion */
-(function(h){if(h!=='finkeldei-online.de'&&h!=='www.finkeldei-online.de')return;
-(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','{{ site.gtm }}');
-})(location.hostname);
+/* Anruf- und E-Mail-Klicks selbst melden (Ereignisse anruf_klick / email_klick für GTM).
+   So zählen sie auch dann, wenn GTM beim ersten Tippen noch nicht geladen ist. */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest&&e.target.closest('a[href^="tel:"],a[href^="mailto:"]');if(!a)return;
+  var href=a.getAttribute('href'),tel=href.indexOf('tel:')===0;
+  window.dataLayer.push({event:tel?'anruf_klick':'email_klick',link_url:href,link_text:(a.textContent||'').replace(/\s+/g,' ').trim().slice(0,100)});
+},true);
+/* Google Tag Manager – nur auf der echten Domain, nicht in der Testversion.
+   Verzögert geladen: kurz nach dem Seitenaufbau oder beim ersten Tippen, Scrollen bzw. Tastendruck.
+   Einwilligung und Ereignisse warten in dataLayer und werden beim Laden verarbeitet. */
+(function(w,d,h){
+  if(h!=='finkeldei-online.de'&&h!=='www.finkeldei-online.de')return;
+  var done=false,ev=['pointerdown','touchstart','keydown','scroll'],o={passive:true};
+  function load(){
+    if(done)return;done=true;
+    ev.forEach(function(t){w.removeEventListener(t,load,o);});
+    w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+    var j=d.createElement('script');j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id={{ site.gtm }}';d.head.appendChild(j);
+  }
+  ev.forEach(function(t){w.addEventListener(t,load,o);});
+  if(d.readyState==='complete')setTimeout(load,1500);else w.addEventListener('load',function(){setTimeout(load,1500);});
+})(window,document,location.hostname);
 </script>
