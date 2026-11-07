@@ -1,0 +1,23 @@
+# Ordner /website/ – statische Website, erzeugt von GitHub (nicht von Hand ändern)
+Options -Indexes
+DirectoryIndex index.html index.xml
+
+# Versteckte Dateien (z. B. Abgleichsliste des Hochladens) nicht ausliefern
+<FilesMatch "^\.">
+Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# Direkter Aufruf über /website/… → nicht gefunden.
+# Die Seiten erscheinen nur über die Regeln in der .htaccess des Hauptordners (ohne /website/ in der Adresse).
+RewriteCond %{THE_REQUEST} \s/+website[/?\s] [NC]
+RewriteRule ^ - [R=404,L]
+</IfModule>
+
+# Testadresse: nicht in Suchmaschinen aufnehmen
+<IfModule mod_headers.c>
+<If "%{HTTP_HOST} == 'neu.finkeldei-online.de'">
+Header always set X-Robots-Tag "noindex, nofollow"
+</If>
+</IfModule>
