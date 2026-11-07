@@ -10,17 +10,57 @@
 {%- endif %}
 {%- if build.noindex %}
 <meta name="robots" content="noindex, nofollow">
-{%- elif seo.robots %}
-<meta name="robots" content="{{ seo.robots.index or 'index' }}, {{ seo.robots.follow or 'follow' }}{% if seo.robots['max-image-preview'] %}, {{ seo.robots['max-image-preview'] }}{% endif %}">
+{%- elif seo.robots and (seo.robots.index or seo.robots.follow) %}
+<meta name="robots" content="{% for k, v in seo.robots %}{{ v }}{% if not loop.last %}, {% endif %}{% endfor %}">
+{%- endif %}
+{%- if page.url == "/" and site.googleVerification %}
+<meta name="google-site-verification" content="{{ site.googleVerification }}">
 {%- endif %}
 <link rel="canonical" href="{{ seo.canonical or (site.url + page.url) }}">
 <meta property="og:locale" content="de_DE">
 <meta property="og:type" content="{{ seo.ogType or 'website' }}">
-<meta property="og:title" content="{{ seo.title }}">
-{%- if seo.description %}<meta property="og:description" content="{{ seo.description }}">{% endif %}
+<meta property="og:title" content="{{ seo.ogTitle or seo.title }}">
+{%- if seo.ogDescription or seo.description %}
+<meta property="og:description" content="{{ seo.ogDescription or seo.description }}">
+{%- endif %}
 <meta property="og:url" content="{{ seo.canonical or (site.url + page.url) }}">
-<meta property="og:site_name" content="{{ site.name }}">
-{%- if seo.ogImage %}<meta property="og:image" content="{{ seo.ogImage }}">{% endif %}
+<meta property="og:site_name" content="{{ seo.ogSiteName or site.seoName }}">
+{%- if seo.articlePublisher %}
+<meta property="article:publisher" content="{{ seo.articlePublisher }}">
+{%- endif %}
+{%- if seo.publishedTime %}
+<meta property="article:published_time" content="{{ seo.publishedTime }}">
+{%- endif %}
+{%- if seo.modifiedTime %}
+<meta property="article:modified_time" content="{{ seo.modifiedTime }}">
+{%- endif %}
+{%- if seo.ogImage %}
+<meta property="og:image" content="{{ seo.ogImage }}">
+{%- if seo.ogImageWidth %}
+<meta property="og:image:width" content="{{ seo.ogImageWidth }}">
+<meta property="og:image:height" content="{{ seo.ogImageHeight }}">
+{%- endif %}
+{%- if seo.ogImageType %}
+<meta property="og:image:type" content="{{ seo.ogImageType }}">
+{%- endif %}
+{%- endif %}
+{%- if seo.author %}
+<meta name="author" content="{{ seo.author }}">
+{%- endif %}
+<meta name="twitter:card" content="{{ seo.twitterCard or 'summary_large_image' }}">
+{%- if seo.twitterCreator %}
+<meta name="twitter:creator" content="{{ seo.twitterCreator }}">
+{%- endif %}
+<meta name="twitter:site" content="{{ seo.twitterSite or site.twitter }}">
+{%- for m in seo.twitterMisc %}
+<meta name="twitter:label{{ loop.index }}" content="{{ m[0] }}">
+<meta name="twitter:data{{ loop.index }}" content="{{ m[1] }}">
+{%- endfor %}
+<link rel="icon" href="{{ site.favicon }}" sizes="32x32">
+<link rel="icon" href="{{ site.favicon }}" sizes="192x192">
+<link rel="apple-touch-icon" href="{{ site.favicon }}">
+<meta name="msapplication-TileImage" content="{{ site.favicon }}">
+<link rel="alternate" type="application/rss+xml" title="{{ site.seoName }} &raquo; Feed" href="{{ site.url }}/feed/">
 <link rel="stylesheet" href="/assets/css/site.css?v={{ build.version }}">
 {%- if seo.schema %}
 <script type="application/ld+json">{{ seo.schema | json | safe }}</script>
