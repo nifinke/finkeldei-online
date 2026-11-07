@@ -88,6 +88,7 @@ console.log(`Seiten ${pages.length}, Beiträge ${posts.length}, Kategorien ${cat
 // Ausgewählte Bilder lokal ablegen (für Entwürfe, Vorlagen und eingebettete Fassungen)
 const LOCAL_MEDIA = [
   "/wp-content/uploads/2024/02/Rechtsanwalt_freigestellt_420.png",
+  "/wp-content/uploads/2021/01/favicon.png", // wird als /favicon.ico ausgeliefert
 ];
 await mkdir("data/media", { recursive: true });
 for (const p of LOCAL_MEDIA) {

@@ -72,8 +72,14 @@ export function cleanContent(html) {
     const fixed = REDIRECTS[decodeURI(u.pathname)] || REDIRECTS[decodeURI(u.pathname).replace(/\/$/, "")];
     if (fixed) { $(a).attr("href", fixed); return; }
     if (/\.(php|html?)$/.test(u.pathname) || id) report.oldLinks.push(href);
-    $(a).attr("href", href.replace(HOSTS, "") || "/");
+    let local = href.replace(HOSTS, "") || "/";
+    // Seitenadressen immer mit Schrägstrich am Ende (vermeidet eine Weiterleitung)
+    local = local.replace(/^(\/[^?#]*?[^/?#.]+)(?=[?#]|$)/, (m, p) => (/\.[a-z0-9]{2,5}$/i.test(p) ? p : p + "/"));
+    $(a).attr("href", local);
   });
+
+  // Nur eine Hauptüberschrift je Seite: H1 im Text werden zu Zwischenüberschriften
+  $("h1").each((_, h) => { h.tagName = "h2"; h.name = "h2"; });
 
   // Bilder: nachladen, wenn sichtbar
   $("img").each((_, img) => {

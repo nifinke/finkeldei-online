@@ -17,6 +17,14 @@ async function* walk(dir) {
 
 for await (const file of walk(OUT)) {
   if (!file.endsWith(".html")) continue;
+  // Fehlerseite: GitHub Pages zeigt sie unter beliebiger Adresse → feste Basis statt relativer Links
+  if (relative(OUT, file) === "404.html") {
+    const base = process.env.PREVIEW_BASE || "/finkeldei-online/";
+    let html = await readFile(file, "utf8");
+    html = html.replace(/(href|src|action)="\/(?!\/)([^"]*)"/g, (m, attr, url) => `${attr}="${base}${url}"`);
+    await writeFile(file, html);
+    continue;
+  }
   const from = posix.dirname(relative(OUT, file).split("\\").join("/"));
   let html = await readFile(file, "utf8");
   html = html.replace(/(href|src)="(\/[^"]*)"/g, (m, attr, url) => {

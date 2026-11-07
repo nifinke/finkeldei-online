@@ -18,6 +18,7 @@ const EXPECTED_CHANGES = {
 };
 
 const rows = [];
+let autoDescriptions = 0;
 for (const u of urls.filter((u) => u.sitemap !== "video-sitemap.xml")) {
   const path = new URL(u.loc).pathname;
   const row = { path, status: "ok", issues: [] };
@@ -36,8 +37,11 @@ for (const u of urls.filter((u) => u.sitemap !== "video-sitemap.xml")) {
     h1: $("h1").first().text().trim(),
   };
   if (y.title && decode(y.title) !== got.title) row.issues.push(`Titel: „${got.title}“ statt „${decode(y.title)}“`);
-  if ((y.description || "") !== got.description) row.issues.push(`Beschreibung abweichend`);
-  if (y.canonical && y.canonical !== got.canonical) row.issues.push(`Canonical: ${got.canonical}`);
+  // Neu: fehlt bei Yoast die Beschreibung, wird sie aus dem Textanfang erzeugt (SEO-Paket A, Punkt 11)
+  if (!y.description && got.description) autoDescriptions++;
+  else if ((y.description || "") !== got.description) row.issues.push(`Beschreibung abweichend`);
+  // Neu: kanonische Adressen auf gelöschte Elternseiten („__trashed“) zeigen auf die eigene Adresse (Punkt 9)
+  if (y.canonical && y.canonical !== got.canonical && !(/__trashed/.test(y.canonical) && got.canonical === u.loc)) row.issues.push(`Canonical: ${got.canonical}`);
   if (!got.h1) row.issues.push("keine Überschrift H1");
   if (row.issues.length) row.status = EXPECTED_CHANGES[path] ? "geplant" : "abweichend";
   rows.push(row);
@@ -111,7 +115,7 @@ for (const lp of ["/verkehrsrecht/rechtsanwalt-verkehrsrecht/", "/arbeitsrecht/r
 }
 
 const count = (s) => rows.filter((r) => r.status === s).length;
-const summary = { geprueft: rows.length, ok: count("ok"), abweichend: count("abweichend"), fehlt: count("fehlt"), geplant: count("geplant"), toteLinks: deadList.length, videos: videoRows.length, videosAbweichend: videoRows.filter((r) => r.status === "abweichend").length, fragenFehlen: faqRows.reduce((n, r) => n + r.missing.length, 0) };
+const summary = { geprueft: rows.length, ok: count("ok"), abweichend: count("abweichend"), fehlt: count("fehlt"), geplant: count("geplant"), toteLinks: deadList.length, videos: videoRows.length, videosAbweichend: videoRows.filter((r) => r.status === "abweichend").length, fragenFehlen: faqRows.reduce((n, r) => n + r.missing.length, 0), autoBeschreibungen: autoDescriptions };
 writeFileSync("pruefbericht.json", JSON.stringify({ summary, rows, dead: deadList, videos: videoRows, faq: faqRows }, null, 1));
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
@@ -120,7 +124,7 @@ mkdirSync(join(OUT, "pruefbericht"), { recursive: true });
 writeFileSync(join(OUT, "pruefbericht", "index.html"), `<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prüfbericht</title>
 <style>body{font-family:system-ui,sans-serif;margin:24px;color:#1f2933}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #e3e8ee;padding:6px 8px;text-align:left;vertical-align:top}th{background:#f6f8fb}h1{font-size:24px}.k{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0 24px}.k div{background:#f6f8fb;border-radius:8px;padding:10px 14px}.k b{display:block;font-size:22px}</style></head><body>
 <h1>Prüfbericht: Vorschau gegen Live-Seite</h1><p>Stand ${new Date().toLocaleString("de-DE", { timeZone: "Europe/Berlin" })}. Grundlage: alle Adressen aus der heutigen Sitemap; verglichen werden Titel, Beschreibung, Canonical und Überschrift.</p>
-<div class="k"><div><b>${summary.geprueft}</b>Adressen geprüft</div><div><b>${summary.ok}</b>identisch</div><div><b>${summary.abweichend}</b>abweichend</div><div><b>${summary.fehlt}</b>fehlen</div><div><b>${summary.geplant}</b>geplante Änderungen</div><div><b>${summary.toteLinks}</b>tote interne Links</div></div>
+<div class="k"><div><b>${summary.geprueft}</b>Adressen geprüft</div><div><b>${summary.ok}</b>identisch</div><div><b>${summary.abweichend}</b>abweichend</div><div><b>${summary.fehlt}</b>fehlen</div><div><b>${summary.geplant}</b>geplante Änderungen</div><div><b>${summary.toteLinks}</b>tote interne Links</div><div><b>${summary.autoBeschreibungen}</b>Beschreibungen neu aus dem Text erzeugt</div></div>
 <h2>Abweichungen und geplante Änderungen</h2><table><tr><th>Adresse</th><th>Status</th><th>Hinweis</th></tr>${rows.filter((r) => r.status !== "ok").map(tr).join("")}</table>
 <h2>Tote interne Links</h2><table><tr><th>Ziel</th><th>Anzahl Seiten</th><th>z. B. auf</th></tr>${deadList.map((d) => `<tr><td>${esc(d.path)}</td><td>${d.count}</td><td>${d.from.map(esc).join("<br>")}</td></tr>`).join("") || "<tr><td colspan=3>keine</td></tr>"}</table>
 <h2>Video-Sitemap</h2><table><tr><th>Seite</th><th>Video</th><th>Status</th><th>Hinweis</th></tr>${videoRows.map((v) => `<tr><td><a href="${esc(v.path)}">${esc(v.path)}</a></td><td>${esc(v.file)}</td><td>${v.status}</td><td>${esc(v.issues.join(" · "))}</td></tr>`).join("") || "<tr><td colspan=4>keine Videos</td></tr>"}</table>
