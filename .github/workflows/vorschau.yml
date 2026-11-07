@@ -1,4 +1,4 @@
-name: Vorschau bauen
+name: Website bauen und hochladen
 
 on:
   push:
@@ -9,8 +9,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
@@ -43,60 +41,35 @@ jobs:
             git pull --rebase origin main
             git push
           fi
-      - name: Prototyp bauen (für Google gesperrt)
-        run: npm run preview
-        env:
-          PREVIEW: "1"
-      - uses: actions/upload-pages-artifact@v3
+      # Website bauen; der Prüfbericht ist die Sperre: bei Abweichungen, fehlenden Seiten oder toten Links bricht der Bau ab
+      - name: Website bauen und prüfen
+        run: npm run release
+      - name: Prüfbericht aufbewahren
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          path: _preview
-      # Echte Fassung für All-Inkl: ohne Vorschau-Banner, mit Prüfbericht als Sperre
-      - name: Website für All-Inkl bauen und prüfen
-        id: release
-        continue-on-error: true
-        run: rm -rf _site && npm run release
+          name: pruefbericht
+          path: pruefbericht.json
+          if-no-files-found: ignore
+          retention-days: 30
       - name: Website für All-Inkl bereitstellen
-        if: steps.release.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: website
           path: _site
           include-hidden-files: true
           retention-days: 7
-    outputs:
-      release: ${{ steps.release.outcome }}
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
 
-  # Hochladen zu All-Inkl (Ordner /website/) per FTP mit TLS – nur wenn die Zugangsdaten hinterlegt sind
+  # Hochladen zu All-Inkl (Ordner /website/) per FTP mit TLS – nur geänderte Dateien
   upload:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Zugangsdaten vorhanden?
-        id: creds
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-        run: echo "ok=$([ -n "$FTP_SERVER" ] && echo yes || echo no)" >> "$GITHUB_OUTPUT"
-      - name: Sperre durch den Prüfbericht
-        if: steps.creds.outputs.ok == 'yes' && needs.build.outputs.release != 'success'
-        run: |
-          echo "::error::Hochladen gesperrt – der Prüfbericht ist nicht sauber (Details im Schritt „Website für All-Inkl bauen und prüfen“)."
-          exit 1
       - uses: actions/download-artifact@v4
-        if: steps.creds.outputs.ok == 'yes'
         with:
           name: website
           path: _site
-      - name: Zu All-Inkl hochladen (nur geänderte Dateien)
-        if: steps.creds.outputs.ok == 'yes'
+      - name: Zu All-Inkl hochladen
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
